@@ -1,0 +1,216 @@
+/*
+==============================================================
+ Formulario
+==============================================================
+*/
+
+/* ----- Ajustar el tamaño de la fuente --------------------------- */
+form {
+    font-size: 1.1rem;
+}
+
+.form__tipos:focus {
+    border: 1px solid #0e1440;
+    box-shadow: 3px 0 30px rgba(163, 163, 163, 0);
+}
+
+/* ----- Ajustar el margin y el padding --------------------------- */
+.form__grupo {
+    padding: 0;
+    margin: 0;
+}
+
+/* ----- Border inferior --------------------------- */
+.form__grupo-border {
+    border-bottom: 1px solid #0e1440;
+}
+
+/* ----- Ajustar advertencias --------------------------- */
+.form__iconos {
+    display: none;
+    right: 20px;
+    top: 6px;
+    position: absolute;
+}
+
+/* ----- Ajuste advertencia del input --------------------------- */
+.form__iconos-right {
+    right: 10px;
+}
+
+/* ----- Diseño de los botones --------------------------- */
+.form__botones {
+    border-radius: 4px;
+    color: white;
+    background-color: #0e1440;
+}
+
+/* ----- Efecto de los botones --------------------------- */
+.form__botones:hover {
+    text-transform: uppercase;
+    color: white;
+    background-color: #030518;
+}
+
+/* ----- Diseño y ajuste para el textarea --------------------------- */
+.form__textarea {
+    padding: 0;
+    border-bottom: 1px solid #0e1440;
+}
+
+/* ----- Ajuste del texto dentro de la descripcion --------------------------- */
+.form__texto {
+    padding: 5px 5px;
+}
+
+/* ----- VALIDACIONES FORMULARIO JAVASCRIPT --------------------------- */
+
+/* Validos */
+.form__iconos-validado {
+    display: block;
+    color: green;
+}
+
+/* Invalidos */
+.form__grupo-invalido,
+.form__grupo-invalido:focus {
+    border: 2px solid red;
+}
+
+.form__grupo-invalido-texto {
+    color: red;
+}
+
+.form__iconos-invalidado {
+    display: block;
+    color: red;
+    animation: 0.3s shake;
+}
+
+/* ----- Animacion para las advertencias --------------------------- */
+@keyframes shake {
+    0% {
+        transform: translate(-2px, 0px);
+    }
+    5% {
+        transform: translate(2px, 0px);
+    }
+    10% {
+        transform: translate(-2px, 0px);
+    }
+    15% {
+        transform: translate(2px, 0px);
+    }
+    20% {
+        transform: translate(-2px, 0px);
+    }
+    100% {
+        transform: translate(2px, 0px);
+    }
+}
+
+/*
+==============================================================
+ TABLA 
+==============================================================
+*/
+
+/* ----- Ajuste de la tabla --------------------------- */
+.tabla {
+    position: fixed;
+    border-radius: 10px 0 0 10px;
+    margin: 0;
+    top: 0;
+    right: 0;
+    height: 100%;
+    transition: 0.2s ease all;
+    color: white;
+    background-color: #0e1440;
+}
+
+/* ----- Efecto de la tabla --------------------------- */
+.tabla:hover {
+    color: rgb(214, 205, 205);
+    transform: scaleX(1.1);
+}
+
+/* ----- Ajuste para el boton --------------------------- */
+.tabla__boton {
+    padding: 0;
+}
+
+/* ----- Diseño del boton de cerrar --------------------------- */
+.tabla__cerrar {
+    border-radius: 50px;
+}
+
+/* ----- Ajuste de los datos de la tabla --------------------------- */
+.tabla__data {
+    /*display: none;*/
+    left: 1100px;
+    border-radius: 10px 0 0 10px;
+    top: 0;
+    right: 0;
+    background-color: #0e1440;
+    transition: 0.5s ease all;
+}
+
+@media screen and (min-width: 1110px) {
+    .tabla__data {
+        left: 2100px;
+    }
+}
+
+.tabla__data-active {
+    right: 0;
+    left: 120px;
+}
+
+/* ----- Scrollbar --------------------------- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* ----- Scrollbar boton --------------------------- */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(124, 114, 114);
+}
+
+/*
+==============================================================
+ VENTANA DE TIPO DE PRODUCTO E INVENTARIO
+==============================================================
+*/
+
+.modal__label {
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+
+.modal__boton {
+    background-color: #0e1440;
+}
+
+.modal__icono {
+    display: none;
+    position: absolute;
+    right: 22px;
+    bottom: 8px;
+}
+
+.modal__input-invalidado,
+.modal__input-invalidado:focus {
+    border: 2px solid red;
+}
+
+.modal__icono-invalidado {
+    display: block;
+    color: red;
+}
+
+.modal__icono-validado {
+    display: block;
+    color: green;
+}

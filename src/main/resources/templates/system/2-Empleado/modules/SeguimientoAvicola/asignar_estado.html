@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Asignar estado de Salud</title>
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/bootstrap.css" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/mdb.min.css" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" href="static/css/registrar_galpon.css" th:href ="@{/css/registrar_galpon.css}">
+    
+    </head>
+    <body>
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Asignar estado</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container">
+        <!-- MENSAJE -->
+        <div class="alert alert-dark alert-dismissable" th:if="${success != null}">
+            <label th:text="${success}"></label>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+         </div>
+            <form id="form" th:action="@{/guardarEstadoSalud}" th:object="${estado_salud}" method="post">
+                <div class="row">
+                    <div class="col pb-4">
+                        <h5 class="text-center titulo">Asignar estado de salud</h5>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label for="galpon">Galpón</label>
+                        <select class="form-control" th:field="*{galpon}" id="galpon" name="galpon" required>
+                            <option th:each="galpon:${galpones}"
+                            	th:value="${galpon.IDGalpon}"
+                            	th:text="${galpon.nombreGalpon}"
+                            />
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="estadoSalud">Estado de salud</label>
+                        <select class="form-control" th:field="*{tipo_estadosalud}" id="estadoSalud" name="estadoSalud" required>
+                            <option th:each="tipo_estadosalud:${tiposEstados}"
+                            	th:value="${tipo_estadosalud.idTipoSalud}"
+                            	th:text="${tipo_estadosalud.estado_salud}"
+                            />
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechaAsignacion">Fecha de Asignación</label>
+                        <input type="date" class="form-control" th:field="*{fechaAsignacion}" id="fechaAsignacion" name="fechaAsignacion" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="descripcionGalpon">Descripción del Galpón</label>
+                        <textarea class="form-control" th:field="*{descripcion}" id="descripcionGalpon" name="descripcionGalpon"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/Empleado/inicio}" class="btn btn-danger btnCerrar">Cerrar</a>
+                
+                    <input type="submit" name="guardarEstadoSalud" value="Registrar" class="btn mdb-color btnRegistrar" onclick="return registroGalpon()"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Script Jquery y Bootstrap-->
+    <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src ="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+    <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src ="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Script otros -->
+    <script src="static/js/alertasSeguimientoAvicola.js" th:src ="@{/js/alertasSeguimientoAvicola.js}"></script>
+</body>
+</html>

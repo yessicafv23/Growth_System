@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--CSS Bootstrap-->
+<link rel="stylesheet"
+	th:href="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+<link rel="stylesheet"
+	th:href="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+<!--Otros CSS-->
+<link rel="stylesheet" th:href="@{/css/registrar_galpon.css}">
+<title>Editar gasto</title>
+</head>
+<body>
+	<div class="tes">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="../../index.jsp"><i
+						class="fa fa-home"></i> Growth System</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Editar
+					Gasto</li>
+			</ol>
+		</nav>
+	</div>
+
+	<div class="container">
+		<form id="form"
+			th:action="@{/actualizarGasto}"
+			th:object="${gasto}" method="post">
+			<div class="row">
+				<div class="col pb-4">
+					<h5 class="text-center titulo">Editar Gasto</h5>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<input type="hidden" class="form-control" th:field="*{IDGasto}">
+					<label for="fechaRegistro">Fecha de Apertura</label> <input
+						type="date" class="form-control" th:field="*{fechaRegistro}"
+						id="fechaRegistro" name="fechaRegistro" required>
+				</div>
+
+
+				<div class="form-group col-md-6">
+					<label for="galpon">Galpón</label>
+					<select class="form-control" th:field="*{galpon}" id="galpon" name="galpon" required>
+						<option th:each="galpon:${galpones}" th:value="${galpon.IDGalpon}"
+							th:text="${galpon.nombreGalpon}" />
+					</select>
+				</div>
+
+
+				<div class="form-group col-md-6">
+					<label for="tipoGasto">Tipo de gasto</label> <select
+						class="form-control" th:field="*{tipo_gasto}" id="tipoGasto"
+						name="tipoGasto" th:required="required">
+						<option th:each="tipo_gasto:${tipoGastos}"
+							th:value="${tipo_gasto.IDTipoGasto}"
+							th:text="${tipo_gasto.tipoGasto}" />
+					</select>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="importe">Importe</label> <input type="text"
+						class="form-control" th:field="*{importe}" id="importe"
+						name="importe" required>
+				</div>
+
+				<div class="form-group col-md-12">
+					<label for="descripcion">Descripción del gasto</label>
+					<textarea class="form-control" th:field="*{observacion}"
+						id="descripcion" name="descripcion"></textarea>
+				</div>
+			</div>
+
+			<div class="modal-footer justify-content-center">
+				<a th:href="@{/consultarGastos}" class="btn btn-danger btnCerrar">Cerrar</a>
+
+
+				<input type="submit" name="guardarGalpon" value="Actualizar"
+					class="btn mdb-color btnRegistrar"></input>
+			</div>
+		</form>
+	</div>
+	<!-- Script Jquery y Bootstrap-->
+	<script type="text/javascript"
+		th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+	<!-- Script otros -->
+	<script th:src="@{/js/alertasSeguimientoAvicola.js}"></script>
+
+</body>
+</html>

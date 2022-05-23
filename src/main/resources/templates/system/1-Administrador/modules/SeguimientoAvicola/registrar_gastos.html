@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,  -scale=1.0">
+        <title>Registrar gastos</title>
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/bootstrap.css" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/mdb.min.css" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" href="static/css/registrar_gastos.css" th:href ="@{/css/registrar_gastos.css}">
+    </head>
+    <body>
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registrar Gastos</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container">
+        <!-- MENSAJES -->
+        <div class="alert alert-dark alert-dismissable" th:if="${success != null}">
+            <label th:text="${danger}"></label>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+         </div>
+            <form th:action="@{/guardarGasto}" th:object="${gasto}" method="post">
+                <div class="row">
+                    <div class="col pb-4">
+                        <h5 class="text-center titulo">Registrar Gasto</h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    	<input type="hidden" th:field="*{IDGasto}">
+                        <label for="fechaRegistro">Fecha de registro</label>
+                        <input type="date" th:field="*{fechaRegistro}" class="form-control" id="fechaRegistro" name="fechaRegistro" th:required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="galpon">Galpón</label>
+                        <select class="form-control" th:field="*{galpon}" id="galpon" name="galpon" th:required="required">
+                            <option th:each="galpon:${galpones}"
+                            	th:value="${galpon.IDGalpon}"
+                            	th:text="${galpon.nombreGalpon}"
+                            />
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="tipoGasto">Tipo de gasto</label>
+                        <select class="form-control" th:field="*{tipo_gasto}" id="tipoGasto" name="tipoGasto" th:required="required">
+                            <option th:each="tipo_gasto:${tipoGastos}"
+                            	th:value="${tipo_gasto.IDTipoGasto}"
+                            	th:text="${tipo_gasto.tipoGasto}"
+                            />
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="importe">Importe</label>
+                        <input type="number" class="form-control" th:field="*{importe}" id="importe" name="importe" placeholder="$" th:required="required">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="descripcion">Descripción del gasto</label>
+                        <textarea class="form-control" th:field="*{observacion}" id="descripcion" name="descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/consultarGastos}" class="btn btn-danger btnCerrar">Cerrar</a>
+
+
+                    <input type="submit" name="guardarGasto" value="Guardar" class="btn mdb-color btnRegistrar"></input>
+                </div>
+            </form>
+        </div>
+        <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src ="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src ="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Script otros -->
+        <script src="static/js/alertasSeguimientoAvicola.js" th:src ="@{/js/alertasSeguimientoAvicola.js}"></script>
+    </body>
+</html>

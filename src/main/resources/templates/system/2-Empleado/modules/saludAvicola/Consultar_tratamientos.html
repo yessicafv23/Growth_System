@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <!--Otros CSS-->
+        <link rel="stylesheet" type="text/css" href="css/Consultar_tratamientos.css">
+                <link rel="stylesheet" href="static/css/Salud_Avicola_Estilos_Empleado/Consultar_tratamientos.css" th:href ="@{/css/Salud_Avicola_Estilos_Empleado/Consultar_tratamientos.css}">
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"  th:href ="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+        <!--CSS Datatables-->
+        <link rel="stylesheet" href="static/library/Datatables/datatables.min.css" th:href ="@{/library/Datatables/datatables.min.css}">
+        <!--CSS Font Awesome-->
+        <link rel="stylesheet" type="text/css" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"  th:href ="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+        <title>Consultar tratamientos</title>
+    </head>
+
+    <body>
+        <!--miga de pan-->
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Consultar Tratamientos</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <!--contenedor principal-->
+        <div class="container">
+             <div class="row pt-5 pl-2">
+                <div class="col-md-12 pt-5 pb-5">
+                    <h1 class="text-center">CONSULTAR TRATAMIENTOS</h1>
+                </div>
+            <!--Criterio de búsqueda-->
+           
+                <div class="col">
+
+
+                    <table id="example" class="display table cell-border">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Tipo de Tratamiento</th>
+                                <th>Galpón</th>
+                                <th>Enfermedad</th>
+                            </tr>
+                        </thead>
+                         <tbody class="text-center">
+	                       
+                        <tr th:each="tratamiento:${tratamientos}">
+                        		<td th:text="${tratamiento.IDTratamiento}"></td>
+								<td th:text="${tratamiento.nombreTratamiento}"></td>
+								<td th:text="${tratamiento.Descripcion}"></td>
+								<td th:text="${tratamiento.IDTipoTratamiento.NombreTipoTratamiento}"></td>
+								<td th:text="${tratamiento.IDGalpon.nombreGalpon}"></td>
+								<td th:text="${tratamiento.IDEnfermedad.Nombre}"></td>
+                        </tr>
+
+
+                        </tr>
+                        </tbody>
+                        <tfoot class="bg-light text-center">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Tipo de Tratamiento</th>
+                                <th>Galpón</th>
+                                <th>ID Enfermedad</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+        <!-- Script Font Awesome-->
+        <script src="static/library/fontawesome-free-5.15.3-web/js/all.min.js" th:src="@{/library/fontawesome-free-5.15.3-web/js/all.min.js}"></script>
+
+       <!-- SCRIPTS DATATABLES-->
+        <script type="text/javascript" src="static/library/Datatables/datatables.min.js" th:src="@{/library/Datatables/datatables.min.js}"></script>
+
+        <!-- Script activacion botones y excel -->
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+        <!-- Script boton copiar -->
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+        <!-- Script boton pdf -->
+        <script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/pdfmake.min.js" th:src="@{/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/vfs_fonts.js" th:src="@{/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+
+        <!-- Script otros -->
+        <script type="text/javascript" src="static/js/Salud_Avicola_JS/consultarTratamiento.js" th:src="@{/js/Salud_Avicola_JS/consultarTratamiento.js}"></script>
+        <script type="text/javascript" src="static/js/Salud_Avicola_JS/tablasTratamiento.js" th:src="@{/js/Salud_Avicola_JS/tablasTratamiento.js}"></script>
+
+
+        
+        <script type="text/javascript">
+            function eliminarTratamientos() {
+                var respuesta = confirm("Estas seguro de eliminar el registro ?");
+                if (respuesta === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--CSS Font Awesome-->
+        <link rel="stylesheet" th:href ="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+        <!-- CSS ICON BOOTSTRAP -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <!--CSS Otros-->
+        <link rel="stylesheet" th:href ="@{/css/sidebar.css}">
+        <title>Growth System - Empleado</title>
+    </head>
+    <body>
+        <div class="contenedor" sec:authorize="hasRole('ROLE_USER')">
+            <div class="wrapper">
+                <nav class="position-fixed nav__sidebar" id="sidebar">
+                    <!-- Perfil - Nombre - Rol -->
+                    <div class="nav__perfil text-center">
+                        <img src="static/img/imagenPerfil.png" th:src="@{/img/imagenPerfil.png}" width="67" height="62" alt="imagenPerfil"/>
+                        <h3 class="nav__nombre">[[${nombre}]]</h3>
+                        <a th:href="@{Empleado/perfil(IDUsuario=${IDUsuario})}"
+                           sec:authorize="hasRole('USER')"
+                           class="btn btn-outline-light" target="ventana">
+                            Empleado
+                        </a>
+                    </div>
+
+                    <!--   Barra navegación lateral izquierda  -->
+                    <!-- Módulo de Seguimientos Avícola-->
+                    <div class="nav__modulos">
+                        <div class="nav__seguimiento nav__componentes" href="#seguimiento" id="secciones" name="seguimiento" data-toggle="collapse" aria-expanded="false" type="button"  ondragstart="return false" onselectstart="return false" oncontextmenu="return false">
+                            <i class="bi bi-plus-lg" id="icono"></i> SEGUIMIENTOS
+                        </div>
+                        <ul class="collapse list-unstyled nav__collapse" id="seguimiento">
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/registrarGalpon}" target="ventana" class="nav__link"><i class="fas fa-edit"></i> Registrar Galpón</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/asignarEstadoSalud}" target="ventana" class="nav__link"><i class="fas fa-edit"></i> Asignar estado de salud</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/consultarSeguimiento}" target="ventana" class="nav__link"><i class="fas fa-table"></i> Consultar Seguimiento de Concentrado</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Módulo de Control de Inventario-->
+                    <div class="nav__modulos">
+                        <div class="nav__componentes nav__inventario" href="#inventario" id="secciones" name="inventario"
+                             data-toggle="collapse" aria-expanded="false" type="button" ondragstart="return false"
+                             onselectstart="return false" oncontextmenu="return false">
+                            <i class="bi bi-plus-lg" id="icono"></i> INVENTARIO
+                        </div>
+                        <ul class="collapse list-unstyled nav__collapse" id="inventario">
+                            <li class="nav__categorias">
+                                <a th:href="@{/Empleado/productos}" target="ventana" class="nav__link"><i class="fas fa-edit"></i>
+                                    Lista de Productos</a>
+                            </li>
+                            <li class="nav__categorias">
+                                <a th:href="@{/Empleado/tipoProducto}" target="ventana" class="nav__link"><i
+                                        class="fas fa-table"></i> Tipos de productos</a>
+                            </li>
+                            <li class="nav__categorias">
+                                <a th:href="@{/Empleado/inventario}" target="ventana" class="nav__link"><i
+                                        class="fas fa-table"></i> Inventario</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Módulo de Salud Avícola-->
+                    <div class="nav__modulos">
+                        <div class="nav__componentes nav__salud" href="#salud" id="secciones" name="salud" data-toggle="collapse" aria-expanded="false" type="button"  ondragstart="return false" onselectstart="return false" oncontextmenu="return false">
+                            <i class="bi bi-plus-lg" id="icono"></i> SALUD AVICOLA
+                        </div>
+                        <ul class="collapse list-unstyled nav__collapse" id="salud">
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/gestionarEnfermedadesEmpleado}" target="ventana" class="nav__link"><i class="fas fa-edit"></i> Gestionar Enfermedades</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/consultarEnfermedadesEmpleado}" target="ventana" class="nav__link"><i class="fas fa-table"></i> Consultar Enfermedades</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/consultarTratamientosEmpleado}" target="ventana" class="nav__link"><i class="fas fa-table"></i> Consultar Tratamientos</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/gestionarSintomasEmpleados}" target="ventana" class="nav__link"><i class="fas fa-edit"></i> Registrar Sintomas</a>
+                            </li>
+                            <li class="nav__categorias" id="navCategorias">
+                                <a th:href="@{/consultarSintomasEmpleado}"  target="ventana" class="nav__link"><i class="fas fa-table"></i> Consultar Sintomas</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- CONTENIDO  -->
+                <div class="content" id="contenidoHorizontal">
+                    <!-- NAVBAR -->
+                    <nav class="navbar navbar-expand-xl position-fixed content__navbar" id="navegacion">
+                        <button type="button" id="sidebarCollapse" class="btn btn-outline-light ">
+                            <i class="fas fa-eye"></i>
+                        </button>
+
+                        <button class="nav__button navbar-toggler btn" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="fa fa-align-justify"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <h2 class="text-center content__titulo">Bienvenidos al sistema</h2>
+                            <ul class="navbar-nav ml-auto">
+                                <!-- Botón de Inicio -->
+                                <li class="nav-item">
+                                    <a th:href="@{/Empleado/inicio}" target="ventana"  class="nav__button btn"><i class="fas fa-home"></i></a>
+                                </li>
+                                <!-- Botón de perfil -->
+                                <li class="nav-item active">
+                                    <a th:href="@{Empleado/perfil(IDUsuario=${IDUsuario})}" target="ventana"  class="nav__button btn">Mi Perfil</a>
+                                </li>
+                                <!-- Botón de Cerrar sesión -->
+                                <li class="nav-item ">
+                                    <form method="POST" th:action="@{/logout}">
+                                        <a href="#" onclick="this.parentNode.submit();" class="nav__button btn">Cerrar Sesión</a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <iframe name="ventana" th:src="@{/Empleado/inicio}" class="w-100 content__iframe" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script  -->
+        <script src="https://kit.fontawesome.com/a556fc6b1f.js" crossorigin="anonymous"></script>
+        <!-- Script Jquery y Bootstrap-->        
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Script Font Awesome-->
+        <script src="static/library/fontawesome-free-5.15.3-web/js/all.min.js"></script>
+
+        <script type="text/javascript" src="static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
+        <script type="text/javascript" src="static/js/bootstrap4-alpha3.min.js" th:src="@{/js/bootstrap4-alpha3.min.js}"></script>
+        <script type="text/javascript" src="static/js/jquery.scrollspeed.min.js" th:src="@{/js/jquery.scrollspeed.min.js}"></script>
+        <script type="text/javascript" src="static/js/jquery.inview.min.js" th:src="@{/js/jquery.inview.min.js}"></script>
+        <script type="text/javascript" src="static/js/responsive.js" th:src="@{/js/responsive.js}"></script>
+    </body>
+</html>

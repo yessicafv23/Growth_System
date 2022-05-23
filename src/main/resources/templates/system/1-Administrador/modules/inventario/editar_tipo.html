@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css} ">
+    <title>editarTipo</title>
+</head>
+<body style="font-size: 1.2rem;">
+<div class="container-fluid col-sm-6 border pt-4 pb-5 mt-4 pt-5 bg-light" style="border-radius: 2%;">
+    <h1 class="text-center">Modificacion del registro: </h1>
+    <hr>
+    <form class="row" method="post" th:object="${tipo}" th:action="@{/guardarTipoProducto}">
+        <input type="hidden" class="form-control d-none" placeholder="ID" th:field="*{IDTipo}">
+        <div class="form-group col-sm-12 py-5 my-5">
+            <div class="row">
+                <label for="tipo_producto" class="col-sm-6 col-form-label">
+                    Nombre del Inventario:
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" th:field="*{nombreTipo}"
+                           placeholder="Nombre del tipo del producto" required>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" class="form-control d-none" placeholder="ID" th:field="*{activoTipo}">
+        <div class="col-sm-12 my-1">
+            <button type="submit" class="btn btn-success btn-block" name="actualizar">Actualizar</button>
+        </div>
+        <div class="col-sm-12 ">
+            <button class="btn btn-danger btn-block" type="reset">Limpiar datos</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

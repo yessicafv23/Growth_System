@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="icon" type="image/png" href="../../img/Logo.png">
+    <!--CSS Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--CSS Font Awesome-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    <!--Otros CSS-->
+    <link rel="stylesheet" href="static/css/perfilAdmin.css" th:href="@{/css/perfilAdmin.css}">
+    <title>Mi Perfil</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-6">
+            <h1 class="text-center pt-3 pb-3 miPerfil">Mi perfil</h1>
+            <div id="contentImg">
+                <div class="imgPerfil">
+                    <img src="static/img/imagenPerfil.png" th:src="@{/img/imagenPerfil.png}" class="img-fluid" alt="">
+                </div>
+            </div>
+            <h4 class="text-center">[[${nombre}]]</h4>
+        </div>
+    </div>
+    <input type="button" class="col-lg-12 col-md-12 pt-1 pb-1 bg datosPersonales" value="Datos personales">
+    <!-- Datos personales -->
+    <div class="row my-4">
+        <div class="col-sm-6 text-center" th:object="${usuario}">
+            <div class="form-group col-md-12 my-2">
+                <label for="inputNombre">Nombres</label>
+                <input type="button" class="form-control" id="nombres" th:value="*{nombre}">
+            </div>
+            <div class="form-group col-md-12 my-2">
+                <label for="inputApellidos">Apellidos</label>
+                <input type="button" class="form-control" id="apellidos" th:value="*{apellido}">
+            </div>
+            <div class="form-group col-md-12 my-2">
+                <label for="inputTipoDoc">Tipo de documento</label>
+                <input type="button" class="form-control" id="tipoDoc" th:value="*{tipo_documento.getTipo_Doc()}">
+            </div>
+            <div class="form-group col-md-12 my-2">
+                <label for="inputDocumento">No. de Identificación</label>
+                <input type="button" class="form-control" id="identificacion" th:value="*{IDUsuario}">
+            </div>
+            <div class="columna_cambio modal-footer col-md-12 d-flex justify-content-start">
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal2">
+                    Cambiar contraseña
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-6 text-center" th:object="${usuario}">
+            <div class="form-group col-md-12 my-2">
+                <label for="inputEmail">Email</label>
+                <input type="button" class="form-control" id="email" th:value="*{username}">
+            </div>
+
+            <div class="form-group col-md-12 my-2">
+                <label for="inputTelefono">Telefono</label>
+                <input type="button" class="form-control" id="telefono" th:value="*{telefono}">
+            </div>
+            <div class="form-group col-md-12 my-2">
+                <label for="inputCiudad">Ciudad de Residencia</label>
+                <input type="button" class="form-control" id="ciudad"
+                       th:value="*{ciudad.getCiudad() + ' ' + ciudad.getDpto()}">
+            </div>
+
+            <div class="form-group col-md-12 my-2">
+                <label for="inputProfesion">Profesión</label>
+                <input type="button" class="form-control" id="profesion" th:value="*{cargo.getCargo()}">
+            </div>
+            <!-- Botón editar perfil -->
+            <div class="modal-footer col-md-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
+                    Edita tu perfil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title centrado text-center">Edita tu perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col md-12 col sm-12">
+                    <form th:method="POST" th:object="${usuario}" th:action="@{/Admin/actualizarPerfil}">
+                        <input type="hidden" class="form-control d-none" th:field="*{IDUsuario}">
+                        <div class="col-md-12 text-center">
+                            <div class="custom-file">
+                                <label for="archivoImg">Cambia tu imagen*</label>
+                                <span class="upload">
+                                            <input type="file" name="imagen" id="imagen1"
+                                                   accept="image/*" disabled title="Debe cargar una imagen de perfil">
+                                        </span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row my-2">
+                            <div class="form-group col-sm-6">
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__nombre">Nombres</label>
+                                    <input type="text" class="form-control" id="form__nombre" name="nombre"
+                                           th:value="*{nombre}" required>
+                                </div>
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__apellidos">Apellidos</label>
+                                    <input type="text" class="form-control" id="form__apellidos" name="apellido"
+                                           th:value="*{apellido}" required>
+                                </div>
+
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__tipodoc">Tipo de Documento</label>
+                                    <select id="form__tipodoc" name="tipo_documento" class="form-control"
+                                            th:field="*{tipo_documento}" required
+                                            title="Seleccione una de las opciones">
+                                        <option th:each="tipodocumentos : ${listTipodocumento}"
+                                                th:value="${tipodocumentos.getIDTipoDoc()}"
+                                                th:text="${tipodocumentos.getTipo_Doc()}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="inputEmail4">No. de Identificación</label>
+                                    <input type="text" class="form-control" id="identificacion1" disabled
+                                           name="IDUsuario"
+                                           pattern="[0-9]{8,10}" th:field="*{IDUsuario}"
+                                           title="El número de documento debe contener entre 8 y 10 dígitos">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__ciudad">Ciudad de Residencia</label>
+                                    <select id="form__ciudad" class="form-control" th:field="*{ciudad}"
+                                            name="ciudad" required title="Seleccione una de las opciones">
+                                        <option th:each="ciudades : ${listCiudad}"
+                                                th:value="${ciudades.getIDCiudad()}"
+                                                th:text="${ciudades.getCiudad()}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__profesion">Profesión</label>
+                                    <select id="form__profesion" name="cargo" class="form-control"
+                                            th:field="*{cargo}" required title="Seleccione una de las opciones">
+                                        <option th:each="cargos : ${listCargo}"
+                                                th:value="${cargos.getIDCargo()}"
+                                                th:text="${cargos.getCargo()}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__email">Email</label>
+                                    <input type="text" class="form-control" name="username" id="form__email" required
+                                           pattern="^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$" th:value="*{username}"
+                                           title="mail@example.com" readonly>
+                                </div>
+                                <div class="form-group col-md-12 my-2">
+                                    <label for="form__telef">Telefono</label>
+                                    <input type="text" class="form-control" name="telefono" id="form__telef"
+                                           required pattern="[0-9]{7,10}" th:value="*{telefono}"
+                                           title="El número de teléfono debe tener mínimo 7 y máximo 10 dígitos">
+                                </div>
+                            </div>
+                            <!--                            EVITE TOCAR ESTOS DOS PARAMETROS YA QUE PUEDEN INCURRIR O A PERDER SU CLAVE O SU ROL-->
+                            <input type="hidden" class="col-sm-10 d-none" name="password" th:field="*{password}">
+                            <input type="hidden" name="rol" th:field="*{rol}">
+                            <!--                            ---------------------------------------------------------------------------------------------->
+                        </div>
+                        <div class="form-group col-sm-12 d-flex justify-content-between">
+                            <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="cerrar">
+                            <input type="submit" class="btn btn-primary" id="botonG" name="actualizar"
+                                   value="Guardar Perfil">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambio de Contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none" role="alert" id="alerta"></div>
+                <div class="alert alert-danger d-none" role="alert" id="alerta2"></div>
+                <form id="formularioCambio" method="post" th:action="@{/Admin/actualizarClave}">
+                    <div class="my-2">
+                        <label for="password">Contraseña Antigua</label>
+                        <input type="password" class="form-control my-1" id="password" name="password"
+                               placeholder="Coloca tu clave antigua aquí">
+                    </div>
+                    <div class="my-2">
+                        <label for="passwordNew">Contraseña Nueva</label>
+                        <input type="password" class="form-control my-1" id="passwordNew" name="passwordNew"
+                               placeholder="Coloca tu clave nueva aquí">
+                    </div>
+                    <div class="my-2">
+                        <label for="passwordRepeat">Repetir Contraseña</label>
+                        <input type="password" class="form-control my-1" id="passwordRepeat" name="passwordRepeat"
+                               placeholder="Coloca otra vez la clave nueva aquí">
+                    </div>
+                    <div class="d-grid my-2">
+                        <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="alertacambio">
+    <div th:if="${mensaje != null}" th:classappend="${cambio ? 'alert-success' : 'alert-danger'}" class="alert">
+        <span class="text-xl"><i th:classappend="${cambio ? 'fa-check-circle' : 'fa-times-circle'}" class="fas"></i> [[${mensaje}]]</span>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/cambioclavePerfil.js}"></script>
+<script>
+    const alertacambio = document.getElementById('alertacambio');
+    const error = document.getElementById('error');
+    setTimeout(() => {
+        alertacambio.classList.add('d-none');
+    }, 4500);
+</script>
+</body>
+</html>

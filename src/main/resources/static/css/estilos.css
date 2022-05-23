@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+----------------------------------------------------------------------------------
+-------------------------------------NAV------------------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* ---- LOGO ---- */
+.nav__logo:hover{
+  transform: rotate(360deg);
+  transition: 1s;
+}
+
+/* ---- Efecto Slider ---- */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link .navbar-brand {
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: 2px solid #18a818;
+  border-top: 2px solid #18a818;
+}
+
+/* ---- Tamanio del contenido NAV ---- */
+.nav-item {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.nav-item:hover{
+  transform: scale(1.1);
+}
+
+/* ---- Cambio del cursor menu desplegable login y registro ---- */
+.dropdown__menu {
+  cursor: pointer;
+}
+
+/*
+----------------------------------------------------------------------------------
+----------------------------------FIN NAV-----------------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* 
+----------------------------------------------------------------------------------
+----------------------------ESTRUCTURA DE LA PAGINA-------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* TITULOS */
+.section__titulos {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  color: #f39222;
+  background-color: #008f39;
+}
+
+/* ---- INICIO ---- */
+
+/* ---- Titulo del Growth System---- */
+.inicio__titulo-1{
+  font-family: "Open Sans", sans-serif;
+  font-size: 4rem;
+  color: #008f39;
+}
+
+.inicio__titulo-1:hover{
+  transform: translateY(10%);
+  transition: 1s;
+}
+
+/* ---- Texto debajo del Growth System  ---- */
+.inicio__sub{
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+/* ---- Banner ---- */
+.carousel__container {
+  border-radius: 1%;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover{
+  background-color: rgba(223, 235, 223, 0.618);
+}
+
+/* ----  NOSOTROS  ---- */
+
+/* ---- Texto descriptivo nosotros ---- */
+.nosotros__texto {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* ---- Bordes de la imagen nosotros ---- */
+.nosotros__img{
+  border-radius: 5%;
+}
+
+/* ---- SERVICIOS ---- */
+
+/* ---- Texto descriptivo de los servicios ---- */
+.servicios__texto{
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ---- Tarjetas servicios ---- */
+.servicios__tarjetas {
+  font-family: "Open Sans", sans-serif;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+/* ---- Titulos del inicio de las tarjetas ---- */
+.servicios__tarjetas-titulos {
+  background: #e9edc9;
+}
+
+/* ----  VALORES(INICIATIVA ESTRATEGICA) ---- */
+
+/* ---- Fondo iniciativa ---- */
+.iniciativa {
+  background: #edf1f6;
+}
+
+/* ---- Titulos mision - vision ---- */
+.iniciativa__titulos {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  color: #f39222;
+}
+
+/* ---- Textos mision - vision ---- */
+.iniciativa__textos {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-weight: 700;
+}
+
+/* ---- Borde superior mision - vision ---- */
+.iniciativa__card {
+  border-top: 6px solid #a5a58d;
+}
+
+/* 
+----------------------------------------------------------------------------------
+--------------------------FIN ESTRUCTURA DE LA PAGINA-------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* 
+----------------------------------------------------------------------------------
+--------------------------------PIE DE PAGINA-------------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* Pie de página*/
+
+/* Color de los titulos */
+.footer__titulos {
+  color: rgb(243, 146, 34);
+}
+
+/* Redondeado de los botones de las redes sociales */
+.footer__redes-sociales {
+  border-radius: 20%;
+}
+
+.footer__redes-sociales:hover{
+  transform: scale(1.2);
+}
+
+/* 
+----------------------------------------------------------------------------------
+------------------------------FIN PIE DE PAGINA-------------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/*
+----------------------------------------------------------------------------------
+---------------------------------MODAL(LOGIN)-------------------------------------
+----------------------------------------------------------------------------------
+*/
+
+/* ---- Color Formulario ---- */
+.modal__letra-blanca {
+  color: white;
+}
+
+/* ---- Boton de cerrar ---- */
+.modal__close{
+  cursor: pointer;
+  color: white;
+}
+
+/* ---- Efecto para el close(login) ---- */
+.modal__close:hover{
+  /* transform: scale(1.5,1.5); */
+  transform: rotate(90deg);
+  transition: 0.5s;
+}
+
+/* ---- Alerta del modal(login, solo se activa si no concide el usuario) ---- */
+.modal__alerta {
+  font-size: 16px;
+}
+
+/* ---- Colores y efecto de los input del correo y clave del modal(login) ---- */
+.modal__correo {
+  background-color: #d9fbe7;
+  border: 3px solid #cdcd04;
+}
+
+/* ---- Clave ---- */
+.modal__clave {
+  background-color: #d9fbe7;
+  border: 3px solid #cdcd04;
+  border-right: none;
+}
+
+/* ---- Ojo del modal(Login) ---- */
+.modal__mostrarclave {
+  background-color: #d9fbe7;
+  border: 3px solid #cdcd04;
+  border-left: none;
+}
+
+/* ---- Hover del Ojo del modal(Login) ---- */
+.modal__fa-eye:hover{
+  color: green;
+  transform: scale(1.2);
+}
+
+/* ---- Modal Link Olvido Su Contrasenia ---- */
+.modal__link-olvido{
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+}
+
+/*
+----------------------------------------------------------------------------------
+-------------------------------FIN MODAL(LOGIN)-----------------------------------
+----------------------------------------------------------------------------------
+*/

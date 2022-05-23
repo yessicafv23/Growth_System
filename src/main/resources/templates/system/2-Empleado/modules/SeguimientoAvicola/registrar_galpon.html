@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" th:href ="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" th:href ="@{/css/registrar_galpon.css}">
+        <title>Registrar galpón</title>
+    </head>
+    <body>
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Galpón</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container">
+        <!-- MENSAJES -->
+        <div class="alert alert-dark alert-dismissable" th:if="${danger != null}">
+            <label th:text="${danger}"></label>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+         </div>
+        <div class="alert alert-dark alert-dismissable" th:if="${success != null}">
+            <label th:text="${success}"></label>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+         </div>
+            <form id="form" th:action="@{/guardarGalpon}" th:object="${galpon}" method="post">
+                <div class="row">
+                    <div class="col pb-4">
+                        <h5 class="text-center titulo">Registrar galpón</h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="idGalpon">Código del Galpón</label>
+                        <input type="text" class="form-control" th:field="*{IDGalpon}" id="idGalpon" name="idGalpon" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="nombreGalpon">Nombre del Galpón</label>
+                        <input type="text" class="form-control" th:field="*{nombreGalpon}" id="nombreGalpon" name="nombreGalpon" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechApertura">Fecha de Apertura</label>
+                        <input type="date" class="form-control" th:field="*{fechaApertura}" id="fechApertura" name="fechApertura" required>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="razaPollos">Raza de los Pollos</label>
+                        <select class="form-control" th:field="*{raza}" id="razaPollos" name="razaPollos" required>
+                            <option value="">---</option>
+                            <option th:each="raza:${razas}"
+                            	th:value="${raza.IDRaza}"
+                            	th:text="${raza.raza}"
+                            />
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="cantidadPollos">Cantidad de Pollos</label>
+                        <input type="text" class="form-control" th:field="*{cantidadPollos}" id="cantidadPollos" name="cantidadPollos" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="descripcionGalpon">Descripción del Galpón</label>
+                        <textarea class="form-control" id="descripcionGalpon" name="descripcionGalpon"></textarea>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <input type="hidden" readonly class="form-control d-none" th:value="${IDUsuario}" id="usuario" name="usuario" value="1"></input>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/Empleado/inicio}" class="btn btn-danger btnCerrar">Cerrar</a>
+                    <input type="submit" name="guardarGalpon" value="Registrar" class="btn mdb-color btnRegistrar"></input>
+                </div>
+            </form>
+
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+            	<label th:text="${error}"></label>
+            	<button type="button" clase="close" data-dismiss="alert">&times;</button>
+            </div>
+
+            <div class="alert alert-info alert-dismissable" th:if="${info != null}">
+            	<label th:text="${info}"></label>
+            	<button type="button" clase="close" data-dismiss="alert">&times;</button>
+            </div>
+        </div>
+        <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Script otros -->
+        <script th:src ="@{/js/alertasSeguimientoAvicola.js}"></script>
+    
+        </body>
+</html>

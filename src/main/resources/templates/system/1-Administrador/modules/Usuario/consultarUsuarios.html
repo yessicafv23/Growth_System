@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Consultar Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/bootstrap.css" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/mdb.min.css" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--CSS Datatables-->
+        <link rel="stylesheet" href="static/library/Datatables/datatables.min.css" th:href ="@{/library/Datatables/datatables.min.css}">
+        <!--CSS Font Awesome-->
+        <link rel="stylesheet" type="text/css" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css" th:href ="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" href="static/css/consultar_seguimientos.css" th:href ="@{/css/consultar_seguimientos.css}">
+    </head>
+    <body>
+
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Consultar Usuarios</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                <!-- Mensaje -->
+                <div class="alert alert-dark alert-dismissable"
+					th:if="${success != null}">
+					<label th:text="${success}"></label>
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+                <div class="alert alert-warning alert-dismissable" th:if="${warning != null}">
+            		<label th:text="${warning}"></label>
+            		<button type="button" class="close" data-dismiss="alert">&times;</button>
+            	</div>
+            	
+            	<div class="col-md-12 pt-2 pb-5">
+                    <h1 class="text-center titulo">Usuarios registrados</h1>
+                </div>
+                    <table id="tablaSeguimientos" class="table table-hover table-bordered" cellpadding="0" width="100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Tipo Ident</th>
+                                <th>Nombre</th>
+                                <th>Apellido(s)</th>
+                                <th>Correo</th>
+                                <th>Telefono</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="usuario: ${usuarios}">
+								<td th:text="${usuario.IDUsuario}"></td>
+								<td th:text="${usuario.Tipo_documento.tipo_Doc}"></td>
+								<td th:text="${usuario.nombre}"></td>
+								<td th:text="${usuario.apellido}"></td>
+								<td th:text="${usuario.username}"></td>
+								<td th:text="${usuario.telefono}"></td>
+                                <td th:if="${usuario.getRol() == 'ROLE_ADMIN'}">ADMINISTRADOR</td>
+                                <td th:if="${usuario.getRol() == 'ROLE_USER'}">EMPLEADO</td>
+                                <td th:if="${usuario.getRol() == 'ROLE_INDEFINIDO'}">NUEVO</td>
+								<td>
+									<div class="btn-group ">
+										<a class="btn btn-success btn-sm btnEditar" th:href="@{/Admin/editarUsuario/}+ ${usuario.IDUsuario}"><i class="fas fa-edit fa-lg"></i></a>
+										<a class="btn btn-danger btn-sm ml-2 btnEliminar" th:href="@{/Admin/eliminarUsuario/}+ ${usuario.IDUsuario}" onclick="return confirm('¿Esta seguro de eliminar el registro?');"><i class="far fa-trash-alt fa-lg"></i></a>
+									</div>
+								</td>
+							</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+        <!-- Script Font Awesome-->
+        <script src="static/library/fontawesome-free-5.15.3-web/js/all.min.js" th:src="@{/library/fontawesome-free-5.15.3-web/js/all.min.js}"></script>
+
+        <!-- SCRIPTS DATATABLES-->
+        <script type="text/javascript" src="static/library/Datatables/datatables.min.js" th:src="@{/library/Datatables/datatables.min.js}"></script>
+
+        <!-- Script activacion botones y excel -->
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+        <!-- Script boton copiar -->
+        <script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+        <!-- Script boton pdf -->
+        <script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/pdfmake.min.js" th:src="@{/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+        <script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/vfs_fonts.js" th:src="@{/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+        
+        <!-- Script otros -->
+    	<script src="static/js/DataTables.js" th:src="@{/js/DataTables.js}"></script>
+    	<script src="static/js/alertasSeguimientoAvicola.js" th:src="@{/js/alertasSeguimientoAvicola.js}"></script>
+    	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </body>
+</html>

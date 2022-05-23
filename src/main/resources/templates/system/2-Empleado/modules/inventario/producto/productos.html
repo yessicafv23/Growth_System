@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.0.1/b-colvis-2.0.1/b-html5-2.0.1/b-print-2.0.1/fc-4.0.1/fh-3.2.0/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.0/sp-1.4.0/sl-1.3.3/sr-1.0.0/datatables.min.css"/>
+    <link rel="stylesheet"
+          th:href="@{/css/inventario/estilos.css}">
+    <title>Productos</title>
+</head>
+
+<body>
+<div id="alertas">
+    <div th:if="${mensaje != null}" th:classappend="${cambio? 'bg-success' : 'bg-danger'}"
+         class="alertas col-sm-4 py-2 d-flex justify-content-between align-items-center">
+        <div class="alerta_icon text-white">
+            <i th:classappend="${cambio? 'fa-check-circle' : 'fa-exclamation-circle'}" class="text-white fas"></i>
+            [[${mensaje}]]
+        </div>
+        <a class="alerta__cerrar" id="alerta-cerrar">
+            x
+        </a>
+    </div>
+</div>
+<div id="alertas"></div>
+<div class="container-fluid">
+    <div class="col-sm-12 border my-2 p-3 seccion-1">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <h2 class="seccion-1_titulo col-sm-7">Lista de productos</h2>
+                    <h5 class="d-flex align-items-center justify-content-end col-sm-5">
+                        Total de Productos en el Inventario:
+                        <span class="h3 pt-2" th:text="${totalProductos}"></span>
+                    </h5>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="seccion-1_filtro col-lg-7 d-flex justify-content-start">
+                        <input type="text" id="myInputTextField" class="form-control col-md-8"
+                               placeholder="&#128269; Busqueda por cualquier parametro...">
+                    </div>
+                    <div class="seccion-1_botones col-lg-5 d-flex justify-content-end">
+                        <button type="button" data-toggle="modal" data-target="#modalEntradas"
+                                class="seccion-1_nuevo btn px-4"><span>+</span> Asignar Entradas
+                        </button>
+                        <button type="button" data-toggle="modal" data-target="#modalProducto"
+                                class="seccion-1_nuevo btn px-4"><span>+</span> Nuevo Producto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border mt-2 seccion-2">
+        <table id="myTable" class="w-100" th:if="${listProductos != null and !listProductos.empty}">
+            <thead>
+            <tr>
+                <th class="seccion-2-border-left">ID</th>
+                <th>Producto</th>
+                <th>Inventario</th>
+                <th>Tipo</th>
+                <th>Existencias</th>
+                <th>Entradas</th>
+                <th>Salidas</th>
+                <th class="">Creado</th>
+                <th class="text-right">Editador Recientemente</th>
+                <th id="noExportar" class="seccion-2-border-right"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="list : ${listProductos}">
+                <th th:text="${list.IDProducto}"></th>
+                <th th:text="${list.nombreProd}"></th>
+                <th th:text="${list.pIdinventario.getNombreInv()}"></th>
+                <th th:text="${list.pIdtipo.getNombreTipo()}"></th>
+                <th th:text="${list.existenciasProd > 0} ? ${list.existenciasProd} : 'Sin Existencias'"></th>
+                <th th:text="${list.entradasProd > 0} ? ${list.entradasProd} : 'Sin Entradas'"></th>
+                <th th:text="${list.salidasProd > 0} ? ${list.salidasProd} : 'Sin Salidas'"></th>
+                <th th:text="${list.pUsuario.getNombre() + ' ' + list.pUsuario.getApellido()}"></th>
+                <th class="text-right"
+                    th:text="${list.pUsuarioLast.getNombre() + ' ' + list.pUsuarioLast.getApellido()}"></th>
+                <th id="noExportar">
+                    <div class="dropdown dropleft text-center" style="padding: 0;">
+                        <button class="btn" type="button" id="dropdownMenuCol" data-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuCol">
+                            <a class="dropdown-item"
+                               th:href="@{/Empleado/editarProducto(IDProducto=${list.IDProducto})}"><i
+                                    class="fas fa-edit"></i> Editar</a>
+                            <a class="dropdown-item" th:if="${list.existenciasProd > 0}"
+                               th:href="@{/Empleado/retirarProductos(IDProducto=${list.IDProducto})}">
+                                <i class="fas fa-sign-out-alt"></i> Retirar productos</a>
+                            <a class="dropdown-item" onclick="return confirm('¿Esta seguro(a) de eliminar el campo?')"
+                               th:href="@{/Empleado/desactivarProducto(IDProducto=${list.IDProducto})}"><i
+                                    class="fas fa-trash-alt"></i> Eliminar</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Producto -->
+<div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modalProducto" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form th:action="@{/Empleado/guardarProducto}" th:object="${producto}" method="POST">
+                    <div class="col-sm-12">
+                        <h6>Tipo de Producto</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <select class="form-control" th:field="*{pIdtipo}">
+                                    <option value="none" disabled selected>Selecciona un tipo</option>
+                                    <option th:each="tipo : ${tipoAP}" th:value="${tipo.IDTipo}">
+                                        [[${tipo.nombreTipo}]]
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h6>Inventario</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <select class="form-control" th:field="*{pIdinventario}">
+                                    <option value="none" disabled selected>Selecciona un tipo</option>
+                                    <option th:each="inventario : ${inventarioAP}"
+                                            th:value="${inventario.IDInventario}">[[${inventario.nombreInv}]]
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h6>Nombre del Producto</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" th:field="*{nombreProd}" placeholder="Concentrado">
+                        <p class="modal_textAdv">Debe contener entre 6 a 40 caracteres sin caracteres especiales</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <h6>Cantidad</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="text" th:field="*{entradasProd}" class="form-control" placeholder="200">
+                    </div>
+                    <div class="col-sm-12">
+                        <h6>Descripcion (Opcional)</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" th:field="*{detalleProd}"
+                               placeholder="Alimento para pollos">
+                    </div>
+                    <div class="col-sm-12">
+                        <button class="btn btn-block modal_boton">+ Agregar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Producto -->
+<div class="modal fade" id="modalEntradas" tabindex="-1" aria-labelledby="modalEntradas" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form th:action="@{/Empleado/entradasProducto}" th:object="${producto}" method="POST" id="formularioEntradas">
+                    <div class="col-sm-12">
+                        <h6>Tipo de Producto</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <select class="form-control" th:field="*{IDProducto}">
+                            <option value="none" disabled selected>Selecciona un tipo</option>
+                            <option th:each="list : ${listProductos}" th:value="${list.IDProducto}">
+                                [[${list.nombreProd}]]
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <h6>Digite la cantidad de entradas nuevas: </h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="number" class="form-control" th:field="*{entradasProd}">
+                        <p id="formulario-textoAlerta" class="modal_textAdv d-none text-danger text-center">Digite un numero mayor a 0</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-block modal_boton">+ Agregar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.0.1/b-colvis-2.0.1/b-html5-2.0.1/b-print-2.0.1/fc-4.0.1/fh-3.2.0/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.0/sp-1.4.0/sl-1.3.3/sr-1.0.0/datatables.min.js"></script>
+
+<script type="text/javascript" th:src="@{/js/inventario/table.js}"></script>
+<script type="text/javascript" th:src="@{/js/inventario/funcionalidad.js}"></script>
+</body>
+
+</html>

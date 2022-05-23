@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css} ">
+    <title>editarProducto</title>
+</head>
+<body class="bg-dark" style="font-size: 1.2rem;">
+<div class="container-fluid col-sm-6 rounded pt-4 pb-5 mt-4 bg-light" style="border-radius: 10%;">
+    <h1 class="text-center">Modificación del registro: </h1>
+    <hr>
+    <form class="row" method="post" th:object="${producto}" th:action="@{/guardarProducto}">
+        <input type="hidden" class="form-control d-none" name="IDProducto" th:field="*{IDProducto}">
+        <div class="form-group col-sm-9">
+            <div class="row">
+                <label for="producto" class="col-sm-5 col-form-label">
+                    Digite el Producto:
+                </label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="producto" name="productos"
+                           placeholder="Nombre del producto" th:field="*{nombreProd}" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="row">
+                <label for="categoria" class="col-sm-4 col-form-label">
+                    Tipos de producto:
+                </label>
+                <div class="col-sm-8">
+                    <select class="form__tipos form-control" name="tipos" th:field="*{pIdtipo.IDTipo}">
+                        <option th:each="tipo : ${tipoAP}" th:value="${tipo.IDTipo}"
+                                th:text="${tipo.nombreTipo}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="row">
+                <label for="inventario" class="col-sm-4 col-form-label">Inventario:</label>
+                <div class="col-sm-8">
+                    <select class="form__tipos form-control" name="inventarios"
+                            th:field="*{pIdinventario.IDInventario}">
+                        <option th:each="inventario : ${inventarioAP}" th:value="${inventario.IDInventario}"
+                                th:text="${inventario.nombreInv}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="row">
+                <label for="detalle" class="col-sm-4 col-form-label">Detalles: </label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="detalle" name="detalles" cols="40" rows="3" th:field="*{detalleProd}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-8 mx-auto">
+            <div class="row text-center">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label for="entrada" class="col-sm-5">Entradas:</label>
+                        <div class="col-sm-6">
+                            <input type="number" id="entrada" name="entradas" class="form-control"
+                                   th:field="*{entradasProd}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label for="salidas" class="col-sm-5">Salidas:</label>
+                        <div class="col-sm-6">
+                            <input type="number" id="salidas" name="salidas" class="form-control"
+                                   th:field="*{salidasProd}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 my-1">
+            <button type="submit" class="btn btn-success btn-block" name="actualizar">Actualizar</button>
+        </div>
+        <div class="col-sm-12 ">
+            <button class="btn btn-danger btn-block" type="reset">Limpiar datos</button>
+        </div>
+    </form>
+</div>
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

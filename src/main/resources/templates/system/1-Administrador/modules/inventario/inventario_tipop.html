@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css} ">
+    <!-- CSS TABLAS -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/library/Datatables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/library/Datatables/Responsive-2.2.7/css/responsive.bootstrap4.min.css}"/>
+    <!-- CSS BOTONES -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/library/Datatables/Buttons-1.7.0/css/buttons.bootstrap4.min.css}"/>
+    <!-- CSS FONT-BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- CSS Estilos -->
+    <link rel="stylesheet"
+          th:href="@{/css/inventario/estilos.css}">
+    <link rel="stylesheet"
+          th:href="@{/css/inventario/estilos_tabla.css}">
+    <title>Inventario</title>
+</head>
+<body>
+<!-- Container -->
+<div class="container-fluid mt-4">
+    <!-- Contenedor de la tabla -->
+    <div class="contenedor__tabla my-3">
+        <div class="contenedor d-flex justify-content-between my-3">
+            <h2 class="tabla__titulo-1">Inventario</h2>
+            <button type="button" class="btn btn-primary mt-2" data-toggle="modal"
+                    data-target="#modalInventario">
+                Agregar Nuevo Inventario
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <!-- Tabla -->
+                <table id="myTable1" class="table table-light table-hover ">
+                    <thead>
+                    <!-- Secciones -->
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del inventario</th>
+                        <th>Detalles del inventario</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <!-- Datos -->
+                    <tbody>
+                    <tr th:each="inventario : ${listInventarios}">
+                        <td th:text="${inventario.IDInventario}"></td>
+                        <td th:text="${inventario.nombreInv}"></td>
+                        <td th:text="${inventario.descripcionInv}"></td>
+                        <td class="text-center">
+                            <button class="btn btn-light" type="button" data-toggle="dropdown"
+                                    th:id="${'#collapse' + inventario.IDInventario}"
+                                    aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu p-0" th:aria-labelledby="${'collapse' + inventario.IDInventario}">
+                                <a class="modalBoton dropdown-item bg-warning"
+                                   th:href="@{/Admin/editarInventario/} + ${inventario.IDInventario}">
+                                    Editar
+                                </a>
+                                <a class="dropdown-item bg-danger"
+                                   th:href="@{/Admin/eliminarInventario/} + ${inventario.IDInventario}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Tabla 2-->
+        <div class="contenedor d-flex justify-content-between my-3">
+            <h2 class="tabla2__titulo-1">Tipos de productos</h2>
+            <button type="button" class="btn btn-primary mt-2" data-toggle="modal"
+                    data-target="#modalTipo">
+                Agregar Nuevo Tipo de producto
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 table-responsive">
+                <!-- Tabla -->
+                <table id="myTable2" class="table table-light table-hover ">
+                    <thead>
+                    <!-- Secciones -->
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo de Producto</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="tipo : ${listTipoP}">
+                        <td th:text="${tipo.IDTipo}"></td>
+                        <td th:text="${tipo.nombreTipo}"></td>
+                        <td class="text-center">
+                            <button class="btn btn-light" type="button" data-toggle="dropdown"
+                                    th:id="${'#collapse' + tipo.IDTipo}"
+                                    aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu p-0" th:aria-labelledby="${'collapse' + tipo.IDTipo}">
+                                <a class="modalBoton dropdown-item bg-warning"
+                                   th:href="@{/Admin/editarTipoProducto/} + ${tipo.IDTipo}">
+                                    Editar
+                                </a>
+                                <a class="dropdown-item bg-danger"
+                                   th:href="@{/Admin/eliminarTipoProducto/} + ${tipo.IDTipo}">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALES -->
+<!-- MODAL TIPO DE PRODUCTO -->
+<div class="modal fade" id="modalTipo" tabindex="-1" aria-labelledby="modalTipoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form th:action="@{/guardarTipoProducto}" th:object="${tipoProducto}" method="POST" class="form"
+                  id="formularioTipo">
+                <div class="modal__tipo modal-header">
+                    <h5 class="modal-title" id="modalTipoLabel">Tipo de Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal__tipo modal-body d-flex justify-content-center">
+                    <div class="col-sm-12 row">
+                        <label for="modalformTipo" class="modal__label col-sm-12 text-center">
+                            Digite el nombre del tipo de producto
+                            <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="top"
+                               title="Debe contener entre 6 y 40 caracteres. No debe contener caracteres especiales $#@%"></i>:
+                        </label>
+                        <input type="text" class="modal__input form-control col-sm-12"
+                               autocomplete="off" th:field="*{nombreTipo}">
+                        <i class="modal__icono bi bi-dash-circle-fill" id="modalformIconoTipo"></i>
+                        <select type="hidden" class="d-none" th:field="*{activoTipo}">
+                            <option value="1" selected></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal__tipo modal-footer d-flex justify-content-center">
+                    <div class="col-sm-12 row d-flex justify-content-around">
+                        <button type="button" class="btn btn-outline-dark col-sm-5"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary col-sm-6 modal__boton" name="agregar_tipo">Añadir
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL INVENTARIO -->
+<div class="modal fade" id="modalInventario" tabindex="-1" aria-labelledby="modalInventarioLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form th:action="@{/guardarInventario}" th:object="${inventario}" method="POST" class="form" id="formularioInventario">
+                <div class="modal__tipo modal-header">
+                    <h5 class="modal-title" id="modalInventarioLabel">Tipo de Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal__tipo modal-body">
+                    <div class="col-sm-12 row">
+                        <label for="nombreInv" class="modal__label col-sm-12">
+                            Digite el nombre del tipo de producto <i class="bi bi-info-circle" data-toggle="tooltip"
+                                                                     data-placement="top"
+                                                                     title="Debe contener entre 6 y 40 caracteres. No debe contener caracteres especiales $#@%"></i>:
+                        </label>
+                        <input type="text" th:field="*{nombreInv}" class="modal__input form-control col-sm-12"
+                               autocomplete="off">
+                        <i class="modal__icono bi bi-dash-circle-fill" id="modalformIconoInventario"></i>
+                    </div>
+                    <div class="col-sm-12 row">
+                        <label for="descripcionInv" class="modal__label col-sm-12">Digite la descripción
+                            del inventario(opcional):</label>
+                        <input th:field="*{descripcionInv}" class="modal__input form-control col-sm-12"></input>
+                    </div>
+                    <select type="hidden" class="d-none" th:field="*{activoInv}">
+                        <option value="1" selected></option>
+                    </select>
+                </div>
+                <div class="modal__tipo modal-footer d-flex justify-content-center">
+                    <div class="col-sm-12 row d-flex justify-content-around">
+                        <button type="button" class="btn btn-outline-dark col-sm-5"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary col-sm-6 modal__boton" name="agregar_inventario">
+                            Añadir
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+<!-- Tablas -->
+<script type="text/javascript"
+        th:src="@{/library/Datatables/DataTables-1.10.24/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/library/Datatables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/library/Datatables/Responsive-2.2.7/js/dataTables.responsive.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/library/Datatables/Responsive-2.2.7/js/responsive.bootstrap4.min.js}"></script>
+<!-- Script activación botones y excel -->
+<script type="text/javascript"
+        th:src="@{/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+<!-- Script boton copiar -->
+<script type="text/javascript" th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+<!-- Script boton pdf -->
+<script type="text/javascript" th:src="@{/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+<script type="text/javascript" th:src="@{/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+
+<!-- Otros -->
+<script type="text/javascript" th:src="@{/js/inventario/table.js}"></script>
+<script type="text/javascript" th:src="@{/js/inventario/validacionModal.js}"></script>
+</body>
+</html>

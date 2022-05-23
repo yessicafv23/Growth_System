@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section th:fragment="table">
+    <div th:if="${listProductos != null and !listProductos.empty}">
+        <table class="table table-light table-hover" id="myTable">
+            <thead>
+            <!-- Secciones -->
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Detalles</th>
+                <th>Existencias</th>
+                <th>Entradas</th>
+                <th>Salidas</th>
+                <th>Inventario</th>
+                <th>Tipo de Producto</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <!-- Datos -->
+            <tbody>
+            <!--/*@thymesVar id="listProductos" type="java.lang.Object"*/-->
+            <tr th:each="list : ${listProductos}">
+                <td th:text="${list.IDProducto}"></td>
+                <td th:text="${list.nombreProd}"></td>
+                <td th:text="${list.detalleProd}"></td>
+                <td th:text="${list.existenciasProd}"></td>
+                <td th:text="${list.entradasProd}"></td>
+                <td th:text="${list.salidasProd}"></td>
+                <td th:text="${list.pIdinventario.nombreInv}"></td>
+                <td th:text="${list.pIdtipo.nombreTipo}"></td>
+                <td class="text-center">
+                    <button class="btn btn-light" type="button" data-toggle="dropdown"
+                            th:id="${'#collapse' + list.IDProducto}"
+                            aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu p-0" th:aria-labelledby="${'collapse' + list.IDProducto}">
+                        <a class="modalBoton dropdown-item bg-warning" th:href="@{/Admin/editarProducto/} + ${list.IDProducto}">
+                            Editar
+                        </a>
+                        <a class="dropdown-item bg-danger" th:href="@{/Admin/eliminarProducto/} + ${list.IDProducto}">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center" th:if="${listProductos == null or listProductos.empty}">
+        <h1> La lista está vacía, agregue registre o inténtelo más tarde</h1>
+    </div>
+
+
+</section>
+</body>
+</html>

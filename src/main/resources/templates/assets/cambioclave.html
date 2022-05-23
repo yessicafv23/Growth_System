@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"
+          th:href="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+    <!-- IMAGEN LOGO -->
+    <link rel="icon" type="image/png" href="../img/Logo.png">
+    <title>Cambio de clave</title>
+</head>
+<body class="bg-dark">
+<div class="col-sm-12 row d-flex flex-column align-items-center py-5">
+    <a th:href="@{/}" class="logo img-fluid py-4">
+        <img class="" src="static/img/Logo.png" th:src="@{/img/Logo.png}" width="75" height="75"
+             title="logo Growth System">
+    </a>
+    <div class="col-sm-4 text-center">
+        <form th:action="@{/procesoReinicio}" method="post" class="">
+            <h3 class="text-white">Coloca tu nueva clave</h3>
+            <input type="hidden" class="d-none" name="token" th:value="${token}"/>
+            <input type="password" name="password" id="password" class="form-control my-3"
+                   placeholder="Coloca tu clave aqui"/>
+            <input type="password" class="form-control my-3" id="password2" placeholder="Confirma tu clave otra vez"/>
+            <input type="submit" value="Cambiar clave" class="btn btn-primary btn-block my-2"/>
+        </form>
+        <div class="alert alert-danger d-none" role="alert" id="alerta"></div>
+        <div class="alert alert-danger d-none" role="alert" id="alerta2"></div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/cambioclave.js}"></script>
+</body>
+</html>

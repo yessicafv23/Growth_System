@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet"
+          th:href="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+    <link rel="stylesheet"
+          th:href="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+    <!--Otros CSS-->
+    <link rel="stylesheet" th:href="@{/css/registrar_galpon.css}">
+    <title>Editar usuario</title>
+</head>
+<body>
+<div class="tes">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../../index.jsp"><i
+                    class="fa fa-home"></i> Growth System</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar
+                usuario
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <form id="form"
+          th:action="@{/Admin/actualizarUsuario}"
+          th:object="${usuario}" method="post">
+        <div class="row">
+            <div class="col pb-4">
+                <h5 class="text-center titulo">Editar usuario</h5>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" th:field="*{IDUsuario}">
+                <label for="nombre">Nombre</label> <input type="text"
+                                                          class="form-control" th:field="*{nombre}" id="nombre"
+                                                          name="nombre" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="apellido">Apellido</label> <input type="text"
+                                                              class="form-control" th:field="*{apellido}" id="apellido"
+                                                              name="apellido" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="tipo_documento">Tipo de documento</label> <select
+                    class="form-control" th:field="*{tipo_documento}" id="tipo_documento"
+                    name="tipo_documento" required>
+                <option th:each="tipoDoc:${listTipodocumento}"
+                        th:value="${tipoDoc.IDTipoDoc}" th:text="${tipoDoc.tipo_Doc}"/>
+            </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="correo">Correo electrónico</label> <input
+                    type="text" class="form-control" th:field="*{username}"
+                    id="correo" name="correo" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="telefono">Teléfono</label> <input type="text"
+                                                              class="form-control" th:field="*{telefono}" id="telefono"
+                                                              name="telefono" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="ciudad">Ciudad</label> <select
+                    class="form-control" th:field="*{ciudad}" id="ciudad"
+                    name="ciudad" required>
+                <option th:each="ciudad:${listCiudad}"
+                        th:value="${ciudad.IDCiudad}" th:text="${ciudad.ciudad}"/>
+            </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="cargo">Cargo</label> <select
+                    class="form-control" th:field="*{cargo}" id="cargo"
+                    name="cargo" required>
+                <option th:each="cargo:${listCargo}"
+                        th:value="${cargo.IDCargo}" th:text="${cargo.cargo}"/>
+            </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="cargo">Rol</label> <select
+                    class="form-control" th:field="*{rol}" id="rol"
+                    name="cargo" required>
+                <option value="ROLE_ADMIN">Administrador o Superior</option>
+                <option value="ROLE_USER">Empleado</option>
+                <option value="ROLE_INDEFINIDO">Pendiente</option>
+            </select>
+            </div>
+            <div class="form-group col-md-6">
+                <input type="password"
+                       class="form-control d-none" th:value="*{password}"
+                       id="password"
+                       name="password">
+            </div>
+        </div>
+
+        <div class="modal-footer justify-content-center">
+        <a th:href="@{/Admin/consultarUsuarios}" class="btn btn-danger btnCerrar">Cerrar</a>
+
+
+            <input type="submit" name="guardarGalpon" value="Guardar"
+                   class="btn mdb-color btnRegistrar"></input>
+        </div>
+    </form>
+</div>
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+<!-- Script otros -->
+<script th:src="@{/js/alertasSeguimientoAvicola.js}"></script>
+
+</body>
+</html>

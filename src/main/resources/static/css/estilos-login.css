@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+.contenedor, .columna__izquierda,
+.columna__derecha{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.logo:hover{
+    transform: rotate(360deg);
+    transition: 1s;
+}
+
+.alerta{
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+    display: flex;
+    bottom: 2%;
+    right: 2%;
+}

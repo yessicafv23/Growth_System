@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="static/css/Salud_Avicola_Estilos/Consultar_sintomas.css"
+          th:href="@{/css/Salud_Avicola_Estilos/Consultar_sintomas.css}">
+
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <!--CSS Datatables-->
+    <link rel="stylesheet" href="static/library/Datatables/datatables.min.css"
+          th:href="@{/library/Datatables/datatables.min.css}">
+    <!--CSS Font Awesome-->
+    <link rel="stylesheet" type="text/css" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"
+          th:href="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+
+    <title>Gestionar prevenciones</title>
+</head>
+<body>
+<!--miga de pan-->
+<div class="tes">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestionar Prevenciones</li>
+        </ol>
+    </nav>
+</div>
+
+<!--contenedor principal-->
+<div class="container">
+    <div class="row pt-5 pl-2">
+        <div class="col-md-12 pt-5 pb-5">
+            <h1 class="text-center">GESTIONAR PREVENCIONES</h1>
+        </div>
+
+        <!--Criterio de búsqueda-->
+
+        <div class="col">
+
+
+            <table id="example" class="display table cell-border">
+                <thead class="thead-dark text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha de Registro</th>
+                    <th>Descripción</th>
+                    <th>Galpón</th>
+                    <th>ID Enfermedad</th>
+
+                    <th class="bg-dark">
+                        Registrar Prevención
+                    </th>
+                    <th class="bg-dark">
+                        Consultar Prevención
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+
+
+                <tr th:each="sintoma:${sintomas}">
+                    <td th:text="${sintoma.IDSintoma}"></td>
+                    <td th:text="${sintoma.FechaRegistro}"></td>
+                    <td th:text="${sintoma.Descripcion}"></td>
+                    <td th:text="${sintoma.IDGalpon.nombreGalpon}"></td>
+                    <td th:text="${sintoma.IDEnfermedad.IDEnfermedad}"></td>
+                    <td class="text-center pt-4"><a class="btn btnRegPrevencion" th:href="@{/gestionarPrevenciones}"
+                                                    role="button">Registrar</a>
+                    <td class="text-center pt-4"><a class="btn btnVerPrevencion" th:href="@{/consultarPrevenciones}"
+                                                    role="button">Consultar</a>
+                    </td>
+                </tr>
+
+                </tbody>
+
+                <tfoot class="bg-light text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha de Registro</th>
+                    <th>Descripción</th>
+                    <th>Galpón</th>
+                    <th>ID Enfermedad</th>
+                    <th>Prevención</th>
+                    <th>Consulta</th>
+                </tr>
+                </tfoot>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Script Font Awesome-->
+<script src="static/library/fontawesome-free-5.15.3-web/js/all.min.js"
+        th:src="@{/library/fontawesome-free-5.15.3-web/js/all.min.js}"></script>
+
+<!-- SCRIPTS DATATABLES-->
+<script type="text/javascript" src="static/library/Datatables/datatables.min.js"
+        th:src="@{/library/Datatables/datatables.min.js}"></script>
+
+<!-- Script activacion botones y excel -->
+<script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js"
+        th:src="@{/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+<script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js"
+        th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+<script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js"
+        th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+<!-- Script boton copiar -->
+<script type="text/javascript" src="static/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js"
+        th:src="@{/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+<!-- Script boton pdf -->
+<script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/pdfmake.min.js"
+        th:src="@{/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+<script type="text/javascript" src="static/library/Datatables/pdfmake-0.1.36/vfs_fonts.js"
+        th:src="@{/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+
+<!-- Script otros -->
+<script type="text/javascript" src="static/js/Salud_Avicola_JS/tablasSintomas.js"
+        th:src="@{/js/Salud_Avicola_JS/tablasSintomas.js}"></script>
+
+
+<script type="text/javascript">
+
+    function eliminard() {
+        var respuesta = confirm("Estas seguro de eliminar el registro ?");
+        if (respuesta === true) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+</script>
+
+</body>
+</html>

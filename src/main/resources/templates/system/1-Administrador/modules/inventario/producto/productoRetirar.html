@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/css/inventario/estilos.css}">
+    <link rel="stylesheet" th:href="@{/library/sweetalert2/sweetalert2.min.css}">
+    <title>Title</title>
+</head>
+<style>
+    .modal{
+        display: block;
+    }
+</style>
+<body>
+<div class="container-fluid d-flex justify-content-center pt-4">
+    <div class="col-sm-8 bg-white">
+        <form th:action="@{/Admin/retirarProductos}" th:object="${productoSalida}" method="POST" id="formulario">
+            <input type="hidden" class="d-none" th:field="*{IDProducto}">
+            <div class="col-sm-12">
+                <h6>Digite la cantidad a retirar del Producto: <span id="nombre_producto" th:text="${productoSalida.getNombreProd()}"></span></h6>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <h6>Cantidad de productos existentes </h6>
+                        <h4 id="entradas" th:text="${productoSalida.getExistenciasProd()}"></h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h6>Cantidad a retirar: </h6>
+                            <input type="text" th:field="*{salidasProd}" class="form-control campos font-weight-bold" id="salidas" placeholder="Digite la cantidad">
+                    </div>
+                </div>
+                <div id="error_salidas" class="alert alert-danger d-none mt-2 text-center">El numero de salidas es mayor a las entradas, verifique los campos</div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a th:href="@{/Admin/productos}" class="btn btn-block btn-secondary">Volver</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <button class="btn btn-block modal_boton">Retirar productos</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+</script>
+<script type="text/javascript" th:src="@{/js/inventario/validar-retiradas.js}"></script>
+<script type="text/javascript" th:src="@{/library/sweetalert2/sweetalert2.min.js}"></script>
+</body>
+</html>

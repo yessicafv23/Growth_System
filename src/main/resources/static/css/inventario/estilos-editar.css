@@ -1,0 +1,39 @@
+:root{
+    --color-primary: rgba(211, 238, 253, 1);
+    --color-secondary: white;
+    --color-third: #343A40;
+    --color-button-1: #343A40;
+    --color-button-2: rgb(224, 6, 6);
+}
+
+html{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    background: var(--color-primary);
+}
+
+.modal_column{
+    padding: 0;
+}
+
+.modal_boton{
+    width: 100%;
+    color: white;
+    background: var(--color-button-1);
+}
+
+.modal_boton:hover{
+    background-color:rgba(0, 0, 0, 0.705);
+    color: white;
+}
+
+.modal_textAdv{
+    color: rgba(0, 0, 0, 0.637);
+    font-size: 0.9rem;
+}
+
+.formInventario > div{
+    padding: 0 25px;
+}

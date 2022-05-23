@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" th:href="@{../static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css} ">
+    <!-- CSS TABLAS -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{../static/library/Datatables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{../static/library/Datatables/Responsive-2.2.7/css/responsive.bootstrap4.min.css}"/>
+    <!-- CSS BOTONES -->
+    <link rel="stylesheet" type="text/css"
+          th:href="@{../static/library/Datatables/Buttons-1.7.0/css/buttons.bootstrap4.min.css}"/>
+    <!-- CSS FONT-BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>AgregarProductos</title>
+</head>
+<body>
+<!-- Container -->
+<div class="container-fluid  d-flex flex-column align-items-center" id="contenedor">
+    <!-- FORMULARIO -->
+    <div class="col-sm-10">
+        <h1 class="col-sm-12 text-center py-3">Agregar Producto</h1>
+        <form class="form-row" id="formulario">
+            <div class="col-md-6">
+                <!-- NOMBRE DEL PRODUCTO -->
+                <section class="form__grupo form__grupo-border row mb-3 pb-4">
+                    <label for="productos" class="form__grupo col-lg-6 d-flex align-items-center"
+                           id="productosTexto">
+                        <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="top"
+                           title="Debe contener entre 6 y 40 caracteres. No debe contener caracteres especiales $#@%"></i>
+                        &nbsp; Nombre del producto:
+                    </label>
+                    <div class="form__grupo col-lg-6 position-relative">
+                        <input type="text" class="form__tipos form-control" id="productos" name="productos"
+                               autocomplete="off">
+                        <i class="form__iconos form__iconos-right bi bi-dash-circle-fill" id="iconoProductos"></i>
+                    </div>
+                </section>
+                <!-- TIPO DE PRODUCTO -->
+                <section class="form__grupo form__grupo-border row mb-3 pb-4">
+                    <label for="tipos" class="form__grupo col-lg-5 py-2">
+                        Tipo del producto:
+                    </label>
+                    <div class="form__grupo col-lg-7">
+                        <select class="form__tipos form-control" name="tipos" id="tipos">
+                            <option value="none" disabled selected>Seleccionar</option>
+                        </select>
+                        <i class="form__iconos bi bi-dash-circle-fill" id="iconoTipos"></i>
+                        <button type="button" class="form__botones btn btn-block mt-2" data-toggle="modal"
+                                data-target="#modalTipo">
+                            Agregar Nuevo Tipo de producto
+                        </button>
+                    </div>
+                </section>
+                <!-- INVENTARIO -->
+                <section class=" form__grupo form__grupo-border row mb-3 pb-4">
+                    <label for="inventarios" class="form__grupo col-lg-5 py-2">
+                        Inventario:
+                    </label>
+                    <div class="form__grupo col-lg-7">
+                        <select class="form__tipos form-control" name="inventarios" id="inventarios">
+                            <option value="none" disabled selected>Seleccionar</option>
+                        </select>
+                        <i class="form__iconos bi bi-dash-circle-fill" id="iconoInventarios"></i>
+                        <button type="button" class="form__botones btn btn-block mt-2" data-toggle="modal"
+                                data-target="#modalInventario">
+                            Agregar Nuevo Inventario
+                        </button>
+                    </div>
+                </section>
+            </div>
+            <!-- DESCRIPCIÓN -->
+            <div class="col-sm-6 d-flex flex-column justify-content-center align-items-center">
+                <div class="form__tipos form__textarea col-sm-9 d-flex flex-column justify-content-center">
+                        <textarea class="form__texto" form="formulario" name="" id="" rows="6"
+                                  placeholder="Descripción del producto(opcional):"></textarea>
+                </div>
+            </div>
+            <!-- BOTONES PARA ENVIAR -->
+            <div class="col-sm-12 mt-2 text-center">
+                <button type="submit" class="form__botones form__botones-upper col-sm-5 btn">Agregar
+                    Producto
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- BOTÓN PARA ABRIR EL FORMULARIO -->
+<button class="tabla btn" id="abrirTabla" type="button">
+    <i class="tabla__icon bi bi-table"></i>
+</button>
+<!-- TABLA -->
+<div class="tabla__data col-sm-11 position-fixed py-1 px-4 h-100 d-flex flex-column justify-content-center"
+     id="tabla">
+    <div class="row">
+        <div class="tabla__boton col-sm-1 d-flex justify-content-start">
+            <button
+                    class="tabla__cerrar btn btn-danger btn-block col-sm-1 d-flex justify-content-center align-items-center"
+                    id="cerrarTabla">x
+            </button>
+        </div>
+        <div class="col-sm-11">
+            <table class="table table-info" id="myTable">
+                <thead>
+                <!-- Secciones -->
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Tipo de Producto</th>
+                    <th>Detalles</th>
+                    <th>Inventario</th>
+                    <th>Entradas</th>
+                    <th>Salidas</th>
+                    <th>Existencias</th>
+                    <th>Editar</th>
+                    <th>Borrar</th>
+                </tr>
+                </thead>
+                <!-- Datos -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- MODALES -->
+<!-- MODAL TIPO DE PRODUCTO -->
+<div class="modal fade" id="modalTipo" tabindex="-1" aria-labelledby="modalTipoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="form" id="formularioTipo">
+                <div class="modal__tipo modal-header">
+                    <h5 class="modal-title" id="modalTipoLabel">Tipo de Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal__tipo modal-body d-flex justify-content-center">
+                    <div class="col-sm-12 row">
+                        <label for="modalformTipo" class="modal__label col-sm-12 text-center">
+                            Digite el nombre del tipo de producto
+                            <i class="bi bi-info-circle" data-toggle="tooltip" data-placement="top"
+                               title="Debe contener entre 6 y 40 caracteres. No debe contener caracteres especiales $#@%"></i>:
+                        </label>
+                        <input type="text" class="modal__input form-control col-sm-12" id="modalformTipo"
+                               name="modalformTipo" autocomplete="off">
+                        <i class="modal__icono bi bi-dash-circle-fill" id="modalformIconoTipo"></i>
+                    </div>
+                </div>
+                <div class="modal__tipo modal-footer d-flex justify-content-center">
+                    <div class="col-sm-12 row d-flex justify-content-around">
+                        <button type="button" class="btn btn-outline-dark col-sm-5"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary col-sm-6 modal__boton" name="agregar_tipo">Añadir
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL INVENTARIO -->
+<div class="modal fade" id="modalInventario" tabindex="-1" aria-labelledby="modalInventarioLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form class="form" id="formularioInventario">
+                <div class="modal__tipo modal-header">
+                    <h5 class="modal-title" id="modalInventarioLabel">Tipo de Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal__tipo modal-body">
+                    <div class="col-sm-12 row">
+                        <label for="modalformInventario" class="modal__label col-sm-12">
+                            Digite el nombre del tipo de producto <i class="bi bi-info-circle" data-toggle="tooltip"
+                                                                     data-placement="top"
+                                                                     title="Debe contener entre 6 y 40 caracteres. No debe contener caracteres especiales $#@%"></i>:
+                        </label>
+                        <input type="text" class="modal__input form-control col-sm-12" id="modalformInventario"
+                               name="modalformInventario" autocomplete="off">
+                        <i class="modal__icono bi bi-dash-circle-fill" id="modalformIconoInventario"></i>
+                    </div>
+                    <div class="col-sm-12 row">
+                        <label for="modalformInventario" class="modal__label col-sm-12">Digite la descripción
+                            del inventario(opcional):</label>
+                        <textarea name="modalformDescripcion" form="formularioInventario" id="modalformDescripcion"
+                                  class="modal__input form-control col-sm-12" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal__tipo modal-footer d-flex justify-content-center">
+                    <div class="col-sm-12 row d-flex justify-content-around">
+                        <button type="button" class="btn btn-outline-dark col-sm-5"
+                                data-dismiss="modal">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary col-sm-6 modal__boton" name="agregar_inventario">
+                            Añadir
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" th:src="@{../static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+<!-- Tablas -->
+<script type="text/javascript"
+        th:src="@{../static/library/Datatables/DataTables-1.10.24/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{../static/library/Datatables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{../static/library/Datatables/Responsive-2.2.7/js/dataTables.responsive.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{../static/library/Datatables/Responsive-2.2.7/js/responsive.bootstrap4.min.js}"></script>
+<!-- Script activación botones y excel -->
+<script type="text/javascript"
+        th:src="@{../static/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+<!-- Script boton copiar -->
+<script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+<!-- Script boton pdf -->
+<script type="text/javascript" th:src="@{../static/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+
+<!-- Otros -->
+<script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript" src="js/funcionalidad.js"></script>
+<script type="text/javascript" src="js/validacion.js"></script>
+<script type="text/javascript" src="js/validacionModal.js"></script>
+
+</body>
+
+</html>

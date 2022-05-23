@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: #D3EEFD;
+}
+
+li a{
+  color: #000;
+}
+
+.titulo{
+  color: #212529;
+  font-size: 30px;
+  font-weight: bold;
+}
+form{
+  width: 90%;
+  padding: 30px;
+  margin: auto;
+  margin-top: 20px;
+  border: 4px solid #233656;
+  color: #000;
+}
+
+label{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+input:required, select:required, textarea:valid{
+  border: solid 1px #7C7A7A;
+  color: #000;
+}
+
+.btn {
+  color: #000;
+  font-weight: bold;
+}
+
+.btnRegistrar:before{
+  content:"";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 1s ease;
+}
+
+.btnCerrar:before {
+  content:"";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 1s ease;
+}
+.btnCerrar:hover:before {
+  width: 100%;
+}
+
+.btnRegistrar:hover{
+    color: #fff;
+}

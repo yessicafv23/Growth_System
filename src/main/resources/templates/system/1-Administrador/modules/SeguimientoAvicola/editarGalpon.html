@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" th:href ="@{/css/registrar_galpon.css}">
+        <title>Registrar galpón</title>
+    </head>
+    <body>
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/consultarGalpon}"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Galpón</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="container">
+            <form id="form" th:action="@{/actualizarGalpon}" th:object="${galpon}" method="POST">
+                <div class="row">
+                    <div class="col pb-4">
+                        <h5 class="text-center titulo">Galpón</h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <input type="hidden" class="form-control" th:field="*{IDGalpon}">
+                    <input type="hidden" class="form-control" th:field="*{usuario}">
+                        <label for="nombreGalpon">Nombre del Galpón</label>
+                        <input type="text" class="form-control" th:field="*{nombreGalpon}" id="nombreGalpon" name="nombreGalpon" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="fechApertura">Fecha de Apertura</label>
+                        <input type="date" class="form-control" th:field="*{fechaApertura}" id="fechApertura" name="fechApertura" required>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="razaPollos" th:text="razas">Raza de los Pollos</label>
+                        <select class="form-control" th:field="*{raza}" id="razaPollos" name="razaPollos" required>
+                            <option value="">---</option>
+                            <option th:each="raza:${razas}"
+                            	th:value="${raza.IDRaza}"
+                            	th:text="${raza.raza}"
+                            />
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="cantidadPollos">Cantidad de Pollos</label>
+                        <input type="text" class="form-control" th:field="*{cantidadPollos}" id="cantidadPollos" name="cantidadPollos" required>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="descripcionGalpon">Descripción del Galpón</label>
+                        <textarea class="form-control" id="descripcionGalpon" name="descripcionGalpon"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/consultarGalpon}" class="btn btn-danger btnCerrar">Cerrar</a>
+                    <input type="submit" name="guardarGalpon" value="Guardar" class="btn mdb-color btnRegistrar"></input>
+                </div>
+            </form>
+        </div>
+        <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" th:src ="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" th:src ="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Script otros -->
+        <script th:src ="@{/js/alertasSeguimientoAvicola.js}"></script>
+    
+        </body>
+</html>

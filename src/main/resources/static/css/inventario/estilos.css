@@ -1,0 +1,239 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css");
+
+:root{
+    --color-primary: rgba(211, 238, 253, 1);
+    --color-secondary: white;
+    --color-third: #343A40;
+    --color-button-1: #343A40;
+    --color-button-2: rgb(224, 6, 6);
+}
+
+html{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    background: var(--color-primary);
+}
+
+.seccion-1{
+    border-radius: 2px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: var(--color-secondary);
+}
+
+.seccion-1_titulo{
+    letter-spacing: 3px;
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
+.seccion-1_nuevo{
+    margin: 0 0 0 10px;
+    background-color: var(--color-button-1);
+    color: white;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.seccion-1_nuevo:hover{
+    background-color:rgba(0, 0, 0, 0.705);
+    color: white;
+}
+
+.seccion-1_eliminar{
+    background-color: var(--color-button-2);
+    color: var(--color-secondary);
+}
+
+.seccion-1_eliminar:hover{
+    background-color: rgba(255, 0, 0, 0.726);
+    color: white;
+}
+
+.seccion-1_filtro > input,
+.seccion-1_filtro > select{
+    margin-right: 10px;
+}
+
+.seccion-1_tituloTipo{
+    letter-spacing: .06rem;
+}
+
+.formInventario > div{
+    padding: 0 25px;
+}
+
+.seccion-1_tituloTipo{
+    padding: 0 0 0 15px !important;
+}
+
+#myTable_filter{
+    display: none;
+}
+
+.seccion-2{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: var(--color-secondary)
+}
+
+.dataTables_wrapper >
+.dt-buttons{
+    margin: 4px 2px 2px 8px;
+}
+
+.buttons-collection{
+    background: white !important;
+    border: 0 !important;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.329);
+}
+
+.seccion-2-border-left{
+    border-radius: 2px 0 0 0;
+}
+
+.seccion-2-border-right{
+    border-radius: 0 2px 0 0;
+}
+
+.modal_column{
+    padding: 0;
+}
+
+.modal_boton{
+    width: 100%;
+    color: white;
+    background: var(--color-button-1);
+}
+
+.modal_boton:hover{
+    background-color:rgba(0, 0, 0, 0.705);
+    color: white;
+}
+
+.modal_textAdv{
+    color: rgba(0, 0, 0, 0.637);
+    font-size: 0.9rem;
+}
+
+form > div{
+    margin: 15px 0;
+}
+
+.dataTable{
+    border-bottom: 0 !important;
+}
+
+.dataTables_length{
+    font-size: 0.8rem;
+    padding: 5px 0 5px 10px;
+}
+
+tbody{
+    font-size: 0.9rem;
+}
+
+thead > tr > th{
+    background: var(--color-third);
+    color: white;
+}
+
+tbody > tr > th{
+    border-top: 1px solid rgba(0, 0, 0, 0.151);
+}
+
+.dataTables_paginate {
+    margin: 10px 5px;
+    font-size: 0.8rem;
+}
+
+.alerta_icon{
+    font-size: 1.2rem;
+}
+
+.alerta__cerrar{
+    color: white;
+    font-weight: bold;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.alertas_text{
+    margin: 4px 0px;
+}
+
+.alertas{
+    position: fixed;
+    z-index: 1;
+    top: 15px;
+    right: 15px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.15);
+}
+
+
+@media screen and (max-width: 988px){
+    .seccion-1_filtro{
+        margin: 5px 0;
+        justify-content: center !important;
+    }
+
+    .seccion-1_botones{
+        padding: 0 10px 0 0;
+        justify-content: space-between !important;
+    }
+
+    .seccion-1_nuevo{
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 681px) {
+    .seccion-1_filtro,
+    .seccion-1_botones{
+        padding: 0 10px 0 10px;
+        display: inline !important;
+    }
+
+    .seccion-1_filtro > input,
+    .seccion-1_filtro > select{
+        margin: 10px 0;
+    }
+
+    .seccion-1_exportar{
+        margin: 10px 0;
+    }
+
+    .seccion-1_exportar,
+    .seccion-1_nuevo{
+        width: 100%;
+    }
+
+    .seccion-2{
+        padding: 5px 0;
+        margin: 5px 0;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .modal_column{
+        padding: 15px;
+    }
+
+    form > div{
+        margin: 10px 0;
+    }
+}
+
+/* ----- Scrollbar --------------------------- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* ----- Scrollbar boton --------------------------- */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(124, 114, 114);
+}

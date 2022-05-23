@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--Otros CSS-->
+    <link rel="stylesheet" href="static/css/Salud_Avicola_Estilos_Empleado/estilos-registro__de_sintomas.css"
+          th:href="@{/css/Salud_Avicola_Estilos_Empleado/estilos-registro__de_sintomas.css}">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <!--CSS Font Awesome-->
+    <link rel="stylesheet" type="text/css" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"
+          th:href="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+    <title>Editar prevencion</title>
+</head>
+<body>
+<!--miga de pan-->
+<div class="tes">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar Sintomas</li>
+        </ol>
+    </nav>
+</div>
+
+<!--Contenedor Principal-->
+<div class="container">
+    <form id="form" th:action="@{/actualizarSintoma}" th:object="${sintoma}"
+          method="post">
+
+        <div class="form-row justify-content-center">
+            <div class="col-md-12 pt-5 pb-5">
+                <h1 class="text-center">EDITAR SINTOMAS</h1>
+            </div>
+
+
+            <div class="form-group col-md-5 pt-4">
+                <div class="label">
+                    <label for="id_sintoma">Ingrese el ID del síntoma</label>
+                    <input class="form-control" type="number" th:field="*{IDSintoma}" name="id_sintoma" id="id_sintoma"
+                           readonly required>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{IDSintoma}')}" th:errors="*{IDSintoma}">ID
+                        Error
+                    </div>
+                    <span class="barra"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-5 pt-4">
+                <div class="label">
+                    <label for="fecha_sintoma">Ingrese la fecha:</label>
+                    <input class="form-control pr-5" type="date" th:field="*{FechaRegistro}" name="fecha_sintoma"
+                           id="fecha_sintoma" required>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{FechaRegistro}')}"
+                         th:errors="*{FechaRegistro}">ID Error
+                    </div>
+                    <span class="barra"></span>
+                </div>
+            </div>
+
+            <!--
+                <div class="form-group col-md-10 pt-4">
+                    <div class="label">
+                        <label for="id_galpon">Ingrese el ID del galpón correspondiente</label>
+                        <input class="form-control" type="number" th:field="*{IDGalpon}" name="id_galpon" id="id_galpon" min="1" maxlength="11" required>
+                        <div class="alert-danger" th:if="${#fields.hasErrors('*{IDGalpon}')}" th:errors="*{IDGalpon}">ID Error</div>
+                        <span class="barra"></span>
+                    </div>
+                </div>
+
+                -->
+
+            <div class="form-group col-md-10 pt-1">
+                <div class="label">
+                    <label for="id_galpon">Escoja el ID del galpón correspondiente:</label>
+                    <select class="custom-select" th:field="*{IDGalpon}" id="id_galpon" name="id_galpon" required>
+                        <option value="">Seleccione...</option>
+                        <option th:each="tipE:${galpon}"
+                                th:value="${tipE.IDGalpon}"
+                                th:text="${tipE.nombreGalpon}"
+                        />
+
+                    </select>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{IDEnfermedad}')}"
+                         th:errors="*{IDEnfermedad}">ID Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-10 pt-4">
+                <div class="custom-textarea">
+                    <label for="descripcion_sintoma">Ingrese la descripción del síntoma:</label>
+                    <textarea class="form-control" th:field="*{Descripcion}" name="descripcion_sintoma"
+                              id="descripcion_sintoma" min="1" maxlength="700" required></textarea>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{Descripcion}')}" th:errors="*{Descripcion}">
+                        ID Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+            <!--
+            <div class="form-group col-md-10 pt-4">
+                <div class="label">
+                    <label for="id_enfermedad">Ingrese el ID de la enfermedad correspondiente</label>
+                    <input class="form-control" type="number" th:field="*{IDEnfermedad}"  name="id_enfermedad" id="id_enfermedad" required>
+
+                    <div class="alert-danger" th:if="${#fields.hasErrors('IDEnfermedad')}" th:errors="*{IDEnfermedad}">ID Error</div>
+                    <span class="barra"></span>
+                </div>
+            </div>
+
+            -->
+
+            <div class="form-group col-md-10 pt-1">
+                <div class="label">
+                    <label for="tipo_enfermedad">Escoja el ID de la enfermedad correspondiente:</label>
+                    <select class="custom-select" th:field="*{IDEnfermedad}" id="id_enfermedad" name="id_enfermedad"
+                            required>
+                        <option value="">Seleccione...</option>
+                        <option th:each="tipE:${enfermedad}"
+                                th:value="${tipE.IDEnfermedad}"
+                                th:text="${tipE.IDEnfermedad}"
+                        />
+
+                    </select>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{IDEnfermedad}')}"
+                         th:errors="*{IDEnfermedad}">ID Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-10">
+                <div class="row mt-4">
+                    <div class="col-md-12 py-2 col-sm-12">
+                        <button type="submit" class="btn btn-dark btn-lg btn-block btnHover" name="btnActualizar"
+                                value="Actualizar">Actualizar Datos
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+
+<script>
+    function buscarSelect() {
+        // creamos un variable que hace referencia al select
+        var select = document.getElementById("elementos");
+
+        // obtenemos el valor a buscar
+        var buscar = document.getElementById("buscar").value;
+
+        // recorremos todos los valores del select
+        for (var i = 1; i < select.length; i++) {
+            if (select.options[i].text == buscar) {
+                // seleccionamos el valor que coincide
+                select.selectedIndex = i;
+            }
+        }
+    }
+</script>
+
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+<script type="text/javascript" src="static/js/Salud_Avicola_JS_Empleado/registrarSintomas.js"
+        th:src="@{/js/Salud_Avicola_JS_Empleado/registrarSintomas.js}"></script>
+</body>
+</html>

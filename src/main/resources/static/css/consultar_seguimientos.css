@@ -1,0 +1,91 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+body{
+	font-family: 'Poppins', sans-serif;
+	background:rgba(8, 155, 240, 0.089);
+}
+li a{
+	color: #000;
+}
+
+.titulo{
+	color: #212529;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+th{
+	font-size: 20px;
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: bold;
+}
+
+td {
+	font-family: 'Open Sans', sans-serif; 
+	color: #000;
+}
+
+#tablaSeguimientos {
+	border: 1px solid #b7b7a4;
+}
+
+.modal-header h5 {
+	font-size: 25px;
+	font-weight: bold;
+	color: #008f39;
+	text-shadow: 0 0 0.2em #F2BB05;
+}
+
+input:valid, select:valid, textarea:valid{
+  border: solid 1px #a5a58d;
+  background-color: #E8E9ED;
+  color: #000;
+}
+
+label{
+	font-weight: bold;
+}
+
+.btnEditar{
+    background-color: #436091;
+    color: #fff;
+}
+
+.btnEditar:hover{
+	transition: all 0.3s;
+	background-color: #233656 !important;
+	color: #fff;
+}
+
+.btnEliminar{
+    background-color: #c2484c;
+    color: #fff;
+}
+
+.btnEliminar:hover{
+	transition: all 0.3s;
+	background-color: #d90429 !important;
+	color: #fff;
+}
+
+input.btn.btn-success.btnRegistrar{
+    background-color: #123456;
+}
+
+.btn-outline{
+	width: 90px;
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: bold;
+	color: #000;
+}
+
+.btn-outline:hover{
+	font-family: 'Open Sans', sans-serif; 
+	transition: all 0.3s;
+	background-color: #233656 !important;
+	color: #fff;
+	font-weight: bold;
+}
+
+
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" th:href="@{../static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css} ">
+        <!-- CSS TABLAS -->
+        <link rel="stylesheet" type="text/css"
+              th:href="@{../static/library/Datatables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css}"/>
+        <link rel="stylesheet" type="text/css"
+              th:href="@{../static/library/Datatables/Responsive-2.2.7/css/responsive.bootstrap4.min.css}"/>
+        <!-- CSS BOTONES -->
+        <link rel="stylesheet" type="text/css"
+              th:href="@{../static/library/Datatables/Buttons-1.7.0/css/buttons.bootstrap4.min.css}"/>
+        <!-- CSS FONT-BOOTSTRAP -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <title>Inventario</title>
+    </head>
+    <!-- Container -->
+    <div class="container-fluid mt-4">
+        <!-- Contenedor de la tabla -->
+        <div class="contenedor__tabla my-3">
+            <h2 class="tabla__titulo-1 text-right">Inventario</h2>
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <!-- Tabla -->
+                    <table id="myTable" class="table table-dark table-hover ">
+                        <thead>
+                            <!-- Secciones -->
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del inventario</th>
+                                <th>Detalles del inventario</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <!-- Datos -->
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                        
+            <!--Tabla 2-->
+            <h2 class="tabla2__titulo-1 text-right">Tipos de productos</h2>
+            <div class="row">
+                <div class="col-sm-12 table-responsive">
+                    <!-- Tabla -->
+                    <table id="myTable2" class="table table-dark table-hover ">
+                        <thead>
+                            <!-- Secciones -->
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo de Producto</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                        </thead>
+                        <!-- Datos -->
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Jquery y Bootstrap-->
+    <script type="text/javascript" th:src="@{../static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Tablas -->
+    <script type="text/javascript"
+            th:src="@{../static/library/Datatables/DataTables-1.10.24/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{../static/library/Datatables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{../static/library/Datatables/Responsive-2.2.7/js/dataTables.responsive.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{../static/library/Datatables/Responsive-2.2.7/js/responsive.bootstrap4.min.js}"></script>
+    <!-- Script activación botones y excel -->
+    <script type="text/javascript"
+            th:src="@{../static/library/Datatables/Buttons-1.7.0/js/dataTables.buttons.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.html5.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.colVis.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/JSZip-2.5.0/jszip.min.js}"></script>
+    <!-- Script boton copiar -->
+    <script type="text/javascript" th:src="@{../static/library/Datatables/Buttons-1.7.0/js/buttons.print.min.js}"></script>
+    <!-- Script boton pdf -->
+    <script type="text/javascript" th:src="@{../static/library/Datatables/pdfmake-0.1.36/pdfmake.min.js}"></script>
+    <script type="text/javascript" th:src="@{../static/library/Datatables/pdfmake-0.1.36/vfs_fonts.js}"></script>
+
+    <!-- Otros -->        
+    <script type="text/javascript" src="js/tablasinventario.js"></script>
+</body>
+
+</html>

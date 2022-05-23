@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,  -scale=1.0">
+        <title>Registrar seguimiento</title>
+        <!--CSS Bootstrap-->
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/bootstrap.css" th:href ="@{/library/MDB-Free_4.19.2/css/bootstrap.css}">
+        <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/mdb.min.css" th:href ="@{/library/MDB-Free_4.19.2/css/mdb.min.css}">
+        <!--Otros CSS-->
+        <link rel="stylesheet" href="static/css/registrar_gastos.css" th:href ="@{/css/registrar_gastos.css}">
+    </head>
+    <body>
+        <div class="tes">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registrar seguimientos</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container">
+                <!-- MENSAJES -->
+        <div class="alert alert-dark alert-dismissable" th:if="${success != null}">
+            <label th:text="${success}"></label>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+         </div>
+            <form th:action="@{/guardarSeguimiento}" th:object="${seguimiento_raza}" method="post">
+                <div class="row">
+                    <div class="col pb-4">
+                        <h5 class="text-center titulo">Seguimiento de alimento diario</h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                    	<input type="hidden" th:field="*{idseguimiento_raza}">
+                        <label for="descripcion">Descripción del Seguimiento</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" th:field="*{descripcion}" th:required="required"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="diasNac" th:text="dias">Dias de nacidos</label>
+                        <select class="form-control" th:field="*{dias}" id="diasNac" name="diasNac" th:required="required">
+                            <option th:each="dia:${dias}" th:value="${dia.id_dias}" th:text="${dia.dias}">                        	
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="raza" th:text="razas">Raza</label>
+                        <select class="form-control" th:field="*{raza}" id="raza" name="raza" th:required="required">
+                            <option th:each="raza:${razas}" th:value="${raza.IDRaza}" th:text="${raza.raza}">
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a th:href="@{/consultarSeguimiento}" class="btn btn-danger btnCerrar">Cerrar</a>
+                    <input type="submit" name="guardarSeguimiento" value="Guardar" class="btn mdb-color btnRegistrar"></input>
+                </div>
+            </form>
+        </div>
+        <!-- Script Jquery y Bootstrap-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.j}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+        <!-- Script otros -->
+        <script src="static/js/alertasSeguimientoAvicola.js" th:src="@{/js/alertasSeguimientoAvicola.js}"></script>
+    </body>
+</html>

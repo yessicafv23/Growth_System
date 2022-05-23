@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"
+          th:href="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+    <!-- ESTILOS CSS -->
+    <link rel="stylesheet" href="static/css/olvido.css" th:href="@{/css/olvido.css}">
+    <!-- IMAGEN LOGO -->
+    <link rel="icon" type="image/png" href="../img/Logo.png">
+
+    <title>Olvido su contraseña</title>
+</head>
+
+<body class="bg-dark">
+<div class="col-sm-12 row d-flex flex-column align-items-center py-5">
+    <a th:href="@{/}" class="logo img-fluid py-4">
+        <img class="" src="static/img/Logo.png" th:src="@{/img/Logo.png}" width="75" height="75"
+             title="logo Growth System">
+    </a>
+    <div class="col-sm-4 alert alert-success text-center" th:if="${mensaje != null}" role="alert">
+        <span th:if="${mensaje != null}">[[${mensaje}]]</span>
+    </div>
+    <div class="col-sm-4 alert alert-danger text-center" th:if="${error != null}" role="alert">
+        <span th:if="${error != null}">[[${error}]]</span>
+    </div>
+    <form class="col-sm-4 text-white" th:action="@{/verificacionCorreo}" method="POST">
+        <h2 class="text-center">Recuperacion de Cuenta</h2>
+        <p class="text-light text-center">
+            No te preocupes, te enviaremos las instrucciones a tu correo
+        </p>
+        <label for="correo">Email</label>
+        <input type="email" class="form-control" name="correo" id="correo" aria-describedby="emailHelp"
+               placeholder="Coloca tu correo aquí" required pattern="^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$"
+               title="example@gmail.com">
+        <button type="submit" class="btn btn-primary mt-3 btn-block" id="enviar">Reiniciar clave</button>
+    </form>
+    <a class="link mt-3 text-decoration-none" th:href="@{/login}"> <i class="fas fa-arrow-left"></i> Volver a iniciar sesión</a>
+</div>
+<!-- BOOTSTRAP -->
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+<!-- SWEET ALERT -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Scrips agregados -->
+<!--        <script src="../js/olvido.js"></script>-->
+
+</body>
+
+</html>

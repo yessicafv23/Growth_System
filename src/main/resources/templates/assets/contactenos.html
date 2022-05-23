@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- BOOTSTRAP CSS -->
+        <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css" th:href ="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+        <!-- FONT AWESOME CSS -->
+        <link rel="stylesheet" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css" th:href ="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+        <!-- IMAGEN LOGO -->
+        <link href="img/Logo.png" rel="icon" type="image/png">
+        <!-- ESTILOS CSS-->
+        <link rel="stylesheet" href="static/css/estilos-contactenos.css" th:href ="@{/css/estilos-contactenos.css}">
+        <title>Contacto | Growth System</title>
+    </head>
+
+    <body data-spy="scroll" data-target="#navbar-total">
+        <!--BARRA DE NAVEGACION FIXED-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="navbar-total">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01"
+                        aria-controls="navbar01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!--Logo posicionado en el nav-->
+                <a class="navbar-brand" th:href="@{/}">
+                    <img class="nav__logo img-fluid " src="static/img/Logo.png" th:src="@{/img/Logo.png}" width="75" height="75"
+                         alt="Logo de la empresa">
+                </a>
+
+                <!--Seccion del nav -->
+                <div class="collapse navbar-collapse" id="navbar01">
+                    <ul class="navbar-nav nav-pills ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white disabled" th:href="@{contactenos}">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN, ROLE_USER, ROLE_INDEFINIDO,  ROLE_VALIDACION')" class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownUser"
+                            data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        <span class="" sec:authentication="name"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" th:href="@{/success}">Panel de control</a>
+                        <form method="POST" th:action="@{/logout}">
+                            <a class="dropdown-item " href="#" onclick="this.parentNode.submit();">Cerrar Sesión</a>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Cuadro desplegable para iniciar sesion o registrarse -->
+                <div sec:authorize="isAnonymous()" class="dropdown mt-1 mr-1">
+                    <button class="btn btn-secundary dropdown-toggle bg-success text-white" type="button" id="iniciarsesion"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Usuario <i class="fas fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu" id="menu_inicio" aria-labelledby="navbardrop2">
+                        <a th:href="@{/login}" class="dropdown-item dropdown__menu">
+                            Iniciar sesion
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a th:href="@{/registro}" class="dropdown-item dropdown__menu">
+                            Registrarse
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!--contenedor de la pagina-->
+        <!--contenedor-->
+        <main class=" mt-5 pt-5 pb-3">
+            <div class="container pt-5 m">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="needs-validation" th:action="@{/sendMail}" method="post" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validation01">Nombre</label>
+                                    <input type="text" class="form-control" name="name" id="validation01" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label for="validation03">Correo electrónico</label>
+                                    <input type="email" class="form-control mb-4 w-100" name="mail" required
+                                           pattern="^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$" title="example@gmail.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validation01">Asunto</label>
+                                    <input type="text" class="form-control" name="subject" id="validation01" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="validationTextarea">Comentarios</label>
+                                    <textarea class="form-control" name="body" id="validationTextarea" required cols="31"
+                                              rows="10"></textarea>
+                                    <div class="invalid-feedback">
+                                        Por favor escriba la inquietud
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                            <button class="text-center mt-4 btn btn-primary" type="submit">Enviar</button>
+                            </div>
+                        </form>
+                        <div th:if="${mensaje != null}" th:classappend="${cambio ? 'bg-green-600' : 'bg-red-600'}" class="alerta text-white rounded" id="alerta">
+                            <span class="text-xl"><i th:classappend="${cambio ? 'fa-check-circle' : 'fa-times-circle'}" class="fas"></i> [[${mensaje}]]</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 py-2">
+                        <div class="embed-responsive embed-responsive-1by1">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d63790.2362621842!2d-75.627468!3d2.195403!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e24d98384178e01%3A0x9f68d7ef91701394!2zR2FyesOzbiwgSHVpbGE!5e0!3m2!1ses!2sco!4v1615158430225!5m2!1ses!2sco"
+                                width="1200" height="800" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!--PIE DE PAGINA-->
+        <footer class="bg-dark">
+            <div class="container">
+                <div class="row pt-4">
+                    <!-- Servicios -->
+                    <div class="col-lg-4">
+                        <h2 class="mb-4 footer__titulos">| SERVICIOS</h2>
+                        <p class="text-light" id="letras">SEGUIMIENTO</p>
+                        <div class="dropdown-divider w-75"></div>
+                        <p class="text-light" id="letras">INVENTARIO</p>
+                        <div class="dropdown-divider w-75"></div>
+                        <p class="text-light" id="letras">SALUD AVICOLA</p>
+                        <div class="dropdown-divider w-75"></div>
+                    </div>
+                    <!-- Links -->
+                    <div class="col-lg-4">
+                        <h2 class="mb-4 footer__titulos">| LINKS</h2>
+                        <a href="#inicio" id="letras" class="text-decoration-none text-light">INICIO</a>
+                        <div class="dropdown-divider w-75"></div>
+                        <a href="#nosotros" id="letras" class="text-decoration-none text-light">NOSOTROS</a>
+                        <div class="dropdown-divider w-75"></div>
+                        <a href="#servicios" id="letras" class="text-decoration-none text-light">SERVICIOS</a>
+                        <div class="dropdown-divider w-75"></div>
+                        <a href="#valores" id="letras" class="text-decoration-none text-light">VALORES</a>
+                        <div class="dropdown-divider w-75"></div>
+                        <a href="jsp/contactenos.jsp" id="letras" class="text-decoration-none text-light">CONTACTO</a>
+                        <div class="dropdown-divider w-75"></div>
+                    </div>
+                    <!-- Links redes sociales -->
+                    <div class="col-lg-4">
+                        <h2 class="footer__titulos">| SÍGUENOS</h2>
+                        <h4 id="letras" class="text-light mb-4 mt-4">EN NUESTRAS REDES SOCIALES</h4>
+                        <div class="row">
+                            <div class="col-2">
+                                <a class="btn footer__redes-sociales" href="#"><i class="text-white h4 fab fa-facebook-square"></i></a>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn footer__redes-sociales" href="#"><i class="text-white h4 fab fa-twitter"></i></a>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn footer__redes-sociales" href="#"><i class="text-white h4 fab fa-instagram"></i></a>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn footer__redes-sociales" href="#"><i class="text-white h4 fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <!-- Imagen y copy -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-xl-12 d-flex justify-content-end align-items-end">
+                                        <img src="../img/Logo.png" class="img-fluid w-25 h-75" alt="Logo de la empresa">
+                                    </div>
+                                    <div class="col-xl-12 text-right">
+                                        <p class="text-white-50">© 2020-2021 <br> Copyright Growth System, Todos los
+                                            derechos reservados</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <!--SCRIPTS PARA JQUERY Y BOOTSTRAP-->
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+        <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+        <!-- Scripts Agregados-->
+        <script type="text/javascript" src="../js/mostrarcontrasena.js"></script>
+        <script type="text/javascript" src="../js/inicio.js"></script>
+        <script type="text/javascript" src="../js/olvido.js"></script>
+        <script type="text/javascript" src="../js/formulariocontacto.js"></script>
+
+    </body>
+
+</html>

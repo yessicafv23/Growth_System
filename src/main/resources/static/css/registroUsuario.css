@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
+
+body, .contenedor{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/img/Fondos/fondo.jpg');
+    background-size: cover;
+}
+
+.col-sm-12, .row{
+    padding: 0;
+    margin: 0;
+}
+
+/* Formulario*/
+.formulario{
+    background-color: rgba(51, 51, 51, 0.85);
+}
+
+label{
+    color: #fff;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.recuadros{
+    background-color: rgba(5, 0, 0, 0.49);
+    color: white
+}
+
+.titulo {
+    color: #fff;
+    text-shadow: 0 0 0.2em #008f39;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.subtitulo{
+    text-align: center;
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 769px) {
+    .formulario{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+    }
+}

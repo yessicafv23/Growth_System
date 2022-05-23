@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Editar prevencion</title>
+    <!--Otros CSS-->
+    <link rel="stylesheet" href="static/css/Salud_Avicola_Estilos/estilos-registro_de_prevenciones.css"
+          th:href="@{/css/Salud_Avicola_Estilos/estilos-registro_de_prevenciones.css}">
+
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css"
+          th:href="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+    <title>Editar prevencion</title>
+</head>
+<!--miga de pan-->
+<div class="tes">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.jsp"><i class="fa fa-home"></i> Growth System</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Editar Prevenciones</li>
+        </ol>
+    </nav>
+</div>
+
+<!--Contenedor Principal-->
+<div class="container">
+    <form id="form" th:action="@{/actualizarPrevencion}" th:object="${prevencion}" method="post">
+
+        <div class="form-row justify-content-center">
+            <div class="col-md-12 pt-5 pb-5">
+                <h1 class="text-center">EDITAR PREVENCIONES</h1>
+            </div>
+
+            <div class="form-group col-md-5 pt-4">
+
+
+                <div class="label">
+                    <label for="id_prevencion">Ingrese el ID de la prevención</label>
+                    <input class="form-control" type="number" th:field="*{IDPrevencion}" name="id_prevencion"
+                           id="id_prevencion" readonly required>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{IDPrevencion}')}"
+                         th:errors="*{IDPrevencion}">ID Error
+                    </div>
+                    <span class="barra"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-5 pt-4">
+                <div class="label">
+                    <label for="fecha_prevenciones">Ingrese la fecha:</label>
+                    <input class="form-control pr-5" th:field="*{FechaRegistro}" id="fecha_prevenciones" type="date"
+                           name="fecha_prevenciones" required>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{FechaRegistro}')}"
+                         th:errors="*{FechaRegistro}">ID Error
+                    </div>
+                    <span class="barra"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group col-md-10 pt-2">
+                <div class="custom-textarea">
+                    <label for="descripcion_solucion">Ingrese una descripción:</label>
+                    <textarea class="form-control" th:field="*{Descripcion}" name="descripcion_solucion"
+                              id="descripcion_solucion" min="1" maxlength="700" required></textarea>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{Descripcion}')}" th:errors="*{Descripcion}">
+                        ID Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group col-md-10 pt-2">
+                <div class="custom-textarea">
+                    <label for="descripcion_recomendacion">Ingrese una recomendación:</label>
+                    <textarea class="form-control" th:field="*{Recomendacion}" name="descripcion_recomendacion"
+                              id="descripcion_recomendacion" min="1" maxlength="700" required></textarea>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{Recomendacion}')}"
+                         th:errors="*{Recomendacion}">ID Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+            <!--
+                <div class="form-group col-md-10 pt-2">
+                    <div class="label">
+                        <label for="id_sintoma">Ingrese el ID del síntoma correspondiente</label>
+                        <input class="form-control" type="number"  th:field="*{IDSintoma}" name="id_sintoma" id="id_sintoma" required>
+                           <div class="alert-danger" th:if="${#fields.hasErrors('*{IDSintoma}')}" th:errors="*{IDSintoma}">ID Error</div>
+                        <span class="barra"></span>
+                    </div>
+                </div>
+                 -->
+            <div class="form-group col-md-10 pt-1">
+                <div class="label">
+                    <label for="id_galpon">Escoja el ID del síntoma correspondiente:</label>
+                    <select class="custom-select" th:field="*{IDSintoma}" id="id_sintoma" name="id_sintoma" required>
+                        <option value="">Seleccione...</option>
+                        <option th:each="tipE:${sintoma}"
+                                th:value="${tipE.IDSintoma}"
+                                th:text="${tipE.IDSintoma}"
+                        />
+
+                    </select>
+                    <div class="alert-danger" th:if="${#fields.hasErrors('*{IDSintoma}')}" th:errors="*{IDSintoma}">ID
+                        Error
+                    </div>
+                    <span class="barra pt-2"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-10">
+                <div class="row mt-4">
+                    <div class="col-md-12 py-2 col-sm-12">
+                        <button type="submit" class="btn btn-dark btn-lg btn-block btnHover" name="btnActualizar"
+                                value="Actualizar">Actualizar Datos
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error
+            MEssage
+        </div>
+
+
+    </form>
+
+
+</div>
+
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+<script type="text/javascript" src="../../js/validation.js"></script>
+<script type="text/javascript" src="static/js/Salud_Avicola_JS/registrarPrevenciones.js"
+        th:src="@{/js/Salud_Avicola_JS/registrarPrevenciones.js}"></script>
+</body>
+</html>

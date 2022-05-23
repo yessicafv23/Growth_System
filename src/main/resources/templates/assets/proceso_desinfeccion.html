@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- BOOTSTRAP CSS -->
+	<link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css" th:href ="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="static/library/fontawesome-free-5.15.3-web/css/all.min.css" th:href ="@{/library/fontawesome-free-5.15.3-web/css/all.min.css}">
+        
+    <!-- LOGO IMAGEN -->
+    <link rel="icon" type="image/png" href="../img/Logo.png">
+    <!-- ESTILOS CSS -->
+    <link rel="stylesheet" href="static/css/estilos.procesodesinfeccion.css" th:href ="@{/css/estilos.procesodesinfeccion.css}">
+    <title>Desinfección de galpones</title>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <section class="text-center">
+            <h1 class="section__titulo-1">Desinfección de Galpones</h1>
+            <hr class="section__linea">
+            <h3 class="section__texto-1">
+                Se debe realizar 12 días antes de la llegada de los pollos y se lleva a cabo de la
+                siguiente
+                manera:
+            </h3>
+        </section>
+        <section class="row pl-5 pt-2">
+            <p class="col-lg-6 section__texto-2 d-flex align-items-center">
+                1. Sacar todo el equipo del galpón: comederos, bebederos, tanques para agua,
+                mangueras, etc. Se deben lavar y exponer al sol, finalmente se debe aplicar un
+                desinfectante a todo el equipo. <br>
+                2. Retirar la gallinaza totalmente y finalizar con un barrido profundo del piso.
+                <br>
+                3. Barrido de techos, paredes, mallas y piso en la parte interna y externa. <br>
+                4. Realizar las adecuaciones pertinentes de la infraestructura. <br>
+                5. Desinfección física con el flameador en piso y paredes. <br>
+                6. Encortinar el galpón totalmente con la fibra limpia y desinfectada
+                previamente. <br>
+                7. Colocar un cielo falso con cortina a todo el techo del galpón para lograr
+                aumentar el calor interno en las primeras semanas de vida. <br>
+                8. Desinfección química con formol 37%, 20 cm/litro de agua por aspersión. <br>
+                9. Aplicar posteriormente un desinfectante a piso y paredes del galpón tratando
+                de no impregnar la malla para evitar que se corroa (por ejemplo Delegol 8
+                cm/litro). <br>
+                10. Aplicar una capa fina de cal al piso (25 kilos para 108 m2). <br>
+                11. Entrada de la viruta o cascarilla a usar como cama. <br>
+                12. Desinfección de la cama con delegol y cal. <br>
+                13. Instalación de todo el equipo a usar en la producción del pollo en el
+                respectivo lugar donde va a estar dentro del galpón en funcionamiento (comederos
+                de tolva, bebederos automáticos) <br>
+            </p>
+            <div class="col-lg-5 d-flex align-items-center">
+                <img src="static/img/Nosotros/desinfeccion.jpg" th:src="@{/img/Nosotros/desinfeccion.jpg}" class="img-fluid shadow-lg section__img mb-5" alt="imagen de la desinfeccion">
+            </div>
+        </section>
+    </div>
+    <div class="col-sm-12 fixed-bottom d-flex justify-content-end mb-3 pr-5">
+        <a class="btn btn-success boton d-flex align-items-center justify-content-center" th:href="@{/}"><i class="fas fa-arrow-left"></i></a>
+    </div>
+
+    <!--SCRIPTS PARA JQUERY Y BOOTSTRAP-->
+    <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+    <script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+
+
+</body>
+
+</html>

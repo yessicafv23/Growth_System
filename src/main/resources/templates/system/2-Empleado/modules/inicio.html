@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" href="static/library/bootstrap-4.6.0-dist/css/bootstrap.min.css"
+          th:href="@{/library/bootstrap-4.6.0-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="static/library/MDB-Free_4.19.2/css/mdb.min.css"
+          th:href="@{/library/MDB-Free_4.19.2/css/mdb.min.cs}">
+    <!--CSS Animate-->
+    <link rel="stylesheet" href="static/library/Otros/animate.min.css" th:href="@{/library/Otros/animate.min.css}"/>
+    <!--CSS-->
+    <link rel="stylesheet" href="static/css/estilos.css" th:href="@{/css/estilos.css}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script th:inline="javascript"
+            th:replace="system/2-Empleado/modules/javascriptDinamico :: scriptDinamicoE"></script>
+    <title>Inico</title>
+</head>
+<style>
+    .tarjeta {
+        background-color: white;
+        text-align: center;
+        font-size: 1.10rem;
+        box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.28);
+        margin: 20px 0;
+        padding: 16px 0;
+    }
+</style>
+<body style="background-color: #D3EEFD">
+<!-- Contenedor fluid, ajuste de altura: 100,  -->
+<div class="container-fluid mt-2">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="col-md-12 tarjeta">
+                    Cantidad de pollos en los galpones: <br> <span class="h4">[[${cantidadPollos}]]</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-md-12 tarjeta">
+                    Productos en existencias: <br> <span class="h4">[[${cantidadProductos}]]</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-12 tarjeta">
+                    Enfermedades registradas: <br> <span class="h4">[[${enferRegistradas}]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 tarjeta">
+            <div class="row px-3">
+                <div class="col-sm-8">
+                    <div class="" id="graficoImporte"></div>
+                </div>
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div id="graficoProductos" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="col-md-12 tarjeta">
+                    Gastos en todo el año: <br> <span class="h4">[[${totalGasto}]]</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-md-12 tarjeta">
+                    Productos Retirados: <br> <span class="h4">[[${salidasProductos}]]</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-12 tarjeta">
+                    Tratamientos registrados: <br> <span class="h4">[[${cantidadTratamiento}]]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Script Jquery y Bootstrap-->
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/jquery-3.5.1.slim.min.js}"></script>
+<script type="text/javascript" src="static/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"
+        th:src="@{/library/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/chart_inicio.js}"></script>
+</body>
+</html>

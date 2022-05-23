@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          th:href="@{/css/inventario/estilos.css}">
+    <title>Title</title>
+</head>
+<style>
+    .modal{
+        display: block;
+    }
+</style>
+<body>
+<div class="container-fluid d-flex justify-content-center pt-4">
+    <div class="col-sm-8 bg-white">
+        <form th:action="@{/Empleado/guardarProducto}" th:object="${producto}" method="POST" id="formulario">
+            <input type="hidden" class="d-none" th:field="*{IDProducto}">
+            <div class="col-sm-12">
+                <h6>Tipo de Producto</h6>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-7 mb-2">
+                        <select class="form-control" th:field="*{pIdtipo}">
+                            <option th:each="tipo : ${tipoAP}" th:value="${tipo.IDTipo}">[[${tipo.nombreTipo}]]</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 modal_column">
+                        <button type="button" class="btn modal_boton" id="">+ Nuevo Tipo</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h6>Inventario</h6>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <select class="form-control" th:field="*{pIdinventario}">
+                            <option th:each="inventario : ${inventarioAP}" th:value="${inventario.IDInventario}">[[${inventario.nombreInv}]]</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 modal_column">
+                        <button type="button" class="btn modal_boton" id="">+ Nuevo Inventario</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h6>Nombre del Producto</h6>
+            </div>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" th:field="*{nombreProd}" placeholder="Concentrado">
+                <p class="modal_textAdv">Debe contener entre 6 a 40 caracteres sin caracteres especiales</p>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6>Entradas</h6>
+                        <input type="text" th:field="*{entradasProd}" class="form-control campos" placeholder="200">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h6>Salidas</h6>
+                        <input type="text" th:field="*{salidasProd}" class="form-control campos" placeholder="200">
+                    </div>
+                </div>
+                <div id="error_salidas" class="alert alert-danger d-none mt-2 text-center">El numero de salidas es mayor a las entradas, verifique los campos</div>
+            </div>
+            <div class="col-sm-12">
+                <h6>Descripcion (Opcional)</h6>
+            </div>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" th:field="*{detalleProd}" placeholder="Alimento para pollos">
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a th:href="@{/Empleado/productos}" class="btn btn-block btn-secondary">Volver</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <button class="btn btn-block modal_boton">Actualizar Producto</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+</script>
+<script type="text/javascript" th:src="@{/js/inventario/validar-salidas.js}"></script>
+</body>
+</html>
